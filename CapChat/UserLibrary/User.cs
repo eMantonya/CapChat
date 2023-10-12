@@ -5,11 +5,11 @@ namespace UserLibrary
 {
     public class User
     {
-        private CryptoHelper _cyptoHelper;
+        private CryptoHelper _cHelper;
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        private byte[] _password;
+        private byte[] _passwordHash;
         private byte[] _salt;
 
         public User(string firstName, string lastName, string email, string password)
@@ -18,7 +18,7 @@ namespace UserLibrary
             FirstName = firstName;
             LastName = lastName;
             Email = email;
-            _password = _cyptoHelper.ComputeHash(password, this._salt);
+            _passwordHash = _cHelper.ComputeHash(password, this._salt);
         }
     }
 

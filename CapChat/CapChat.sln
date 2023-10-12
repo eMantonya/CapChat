@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientGUI", "CapChat\Client
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserLibrary", "UserLibrary\UserLibrary.csproj", "{F88FBC66-4819-46E9-A245-8DBB66526D67}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientTests", "ClientTests\ClientTests.csproj", "{B145F19C-5E2D-453D-9EAD-0AA4157F6761}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F88FBC66-4819-46E9-A245-8DBB66526D67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F88FBC66-4819-46E9-A245-8DBB66526D67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F88FBC66-4819-46E9-A245-8DBB66526D67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B145F19C-5E2D-453D-9EAD-0AA4157F6761}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B145F19C-5E2D-453D-9EAD-0AA4157F6761}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B145F19C-5E2D-453D-9EAD-0AA4157F6761}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B145F19C-5E2D-453D-9EAD-0AA4157F6761}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
