@@ -51,8 +51,17 @@
             label6 = new Label();
             label5 = new Label();
             label4 = new Label();
+            checkmarkPass = new PictureBox();
+            checkmarkConfirmPass = new PictureBox();
+            errorFirstName = new Label();
+            errorLastName = new Label();
+            errorEmail = new Label();
+            errorPass = new Label();
+            errorConfirmPass = new Label();
             panelLogin.SuspendLayout();
             panelRegister.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)checkmarkPass).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)checkmarkConfirmPass).BeginInit();
             SuspendLayout();
             // 
             // buttonLoginScreen
@@ -170,6 +179,13 @@
             // panelRegister
             // 
             panelRegister.BackColor = Color.Transparent;
+            panelRegister.Controls.Add(errorConfirmPass);
+            panelRegister.Controls.Add(errorPass);
+            panelRegister.Controls.Add(errorEmail);
+            panelRegister.Controls.Add(errorLastName);
+            panelRegister.Controls.Add(errorFirstName);
+            panelRegister.Controls.Add(checkmarkConfirmPass);
+            panelRegister.Controls.Add(checkmarkPass);
             panelRegister.Controls.Add(buttonRegisterSubmit);
             panelRegister.Controls.Add(textBoxRegisterConfirmPass);
             panelRegister.Controls.Add(textBoxRegisterPass);
@@ -208,7 +224,7 @@
             textBoxRegisterConfirmPass.ForeColor = Color.LightSkyBlue;
             textBoxRegisterConfirmPass.Location = new Point(577, 170);
             textBoxRegisterConfirmPass.Name = "textBoxRegisterConfirmPass";
-            textBoxRegisterConfirmPass.PlaceholderText = "First Name";
+            textBoxRegisterConfirmPass.PlaceholderText = "Confirm Password";
             textBoxRegisterConfirmPass.Size = new Size(168, 25);
             textBoxRegisterConfirmPass.TabIndex = 10;
             // 
@@ -219,7 +235,7 @@
             textBoxRegisterPass.ForeColor = Color.LightSkyBlue;
             textBoxRegisterPass.Location = new Point(577, 116);
             textBoxRegisterPass.Name = "textBoxRegisterPass";
-            textBoxRegisterPass.PlaceholderText = "First Name";
+            textBoxRegisterPass.PlaceholderText = "Password";
             textBoxRegisterPass.Size = new Size(168, 25);
             textBoxRegisterPass.TabIndex = 9;
             // 
@@ -230,7 +246,7 @@
             textBoxRegisterLName.ForeColor = Color.LightSkyBlue;
             textBoxRegisterLName.Location = new Point(158, 136);
             textBoxRegisterLName.Name = "textBoxRegisterLName";
-            textBoxRegisterLName.PlaceholderText = "First Name";
+            textBoxRegisterLName.PlaceholderText = "Last Name";
             textBoxRegisterLName.Size = new Size(168, 25);
             textBoxRegisterLName.TabIndex = 8;
             // 
@@ -241,7 +257,7 @@
             textBoxRegisterEmail.ForeColor = Color.LightSkyBlue;
             textBoxRegisterEmail.Location = new Point(158, 191);
             textBoxRegisterEmail.Name = "textBoxRegisterEmail";
-            textBoxRegisterEmail.PlaceholderText = "First Name";
+            textBoxRegisterEmail.PlaceholderText = "Email";
             textBoxRegisterEmail.Size = new Size(168, 25);
             textBoxRegisterEmail.TabIndex = 7;
             // 
@@ -322,6 +338,83 @@
             label4.TabIndex = 0;
             label4.Text = "Register";
             // 
+            // checkmarkPass
+            // 
+            checkmarkPass.BackColor = Color.Transparent;
+            checkmarkPass.BackgroundImage = (Image)resources.GetObject("checkmarkPass.BackgroundImage");
+            checkmarkPass.BackgroundImageLayout = ImageLayout.Stretch;
+            checkmarkPass.Location = new Point(740, 116);
+            checkmarkPass.Name = "checkmarkPass";
+            checkmarkPass.Size = new Size(34, 25);
+            checkmarkPass.TabIndex = 12;
+            checkmarkPass.TabStop = false;
+            // 
+            // checkmarkConfirmPass
+            // 
+            checkmarkConfirmPass.BackColor = Color.Transparent;
+            checkmarkConfirmPass.BackgroundImage = (Image)resources.GetObject("checkmarkConfirmPass.BackgroundImage");
+            checkmarkConfirmPass.BackgroundImageLayout = ImageLayout.Stretch;
+            checkmarkConfirmPass.Location = new Point(740, 170);
+            checkmarkConfirmPass.Name = "checkmarkConfirmPass";
+            checkmarkConfirmPass.Size = new Size(34, 25);
+            checkmarkConfirmPass.TabIndex = 13;
+            checkmarkConfirmPass.TabStop = false;
+            // 
+            // errorFirstName
+            // 
+            errorFirstName.AutoSize = true;
+            errorFirstName.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            errorFirstName.ForeColor = Color.Red;
+            errorFirstName.Location = new Point(158, 111);
+            errorFirstName.Name = "errorFirstName";
+            errorFirstName.Size = new Size(63, 17);
+            errorFirstName.TabIndex = 14;
+            errorFirstName.Text = "Required";
+            // 
+            // errorLastName
+            // 
+            errorLastName.AutoSize = true;
+            errorLastName.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            errorLastName.ForeColor = Color.Red;
+            errorLastName.Location = new Point(158, 164);
+            errorLastName.Name = "errorLastName";
+            errorLastName.Size = new Size(63, 17);
+            errorLastName.TabIndex = 15;
+            errorLastName.Text = "Required";
+            // 
+            // errorEmail
+            // 
+            errorEmail.AutoSize = true;
+            errorEmail.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            errorEmail.ForeColor = Color.Red;
+            errorEmail.Location = new Point(158, 219);
+            errorEmail.Name = "errorEmail";
+            errorEmail.Size = new Size(63, 17);
+            errorEmail.TabIndex = 16;
+            errorEmail.Text = "Required";
+            // 
+            // errorPass
+            // 
+            errorPass.AutoSize = true;
+            errorPass.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            errorPass.ForeColor = Color.Red;
+            errorPass.Location = new Point(577, 144);
+            errorPass.Name = "errorPass";
+            errorPass.Size = new Size(185, 17);
+            errorPass.TabIndex = 17;
+            errorPass.Text = "Must be at least 10 charaters";
+            // 
+            // errorConfirmPass
+            // 
+            errorConfirmPass.AutoSize = true;
+            errorConfirmPass.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            errorConfirmPass.ForeColor = Color.Red;
+            errorConfirmPass.Location = new Point(577, 194);
+            errorConfirmPass.Name = "errorConfirmPass";
+            errorConfirmPass.Size = new Size(149, 17);
+            errorConfirmPass.TabIndex = 18;
+            errorConfirmPass.Text = "Passwords must match";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -344,6 +437,8 @@
             panelLogin.PerformLayout();
             panelRegister.ResumeLayout(false);
             panelRegister.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)checkmarkPass).EndInit();
+            ((System.ComponentModel.ISupportInitialize)checkmarkConfirmPass).EndInit();
             ResumeLayout(false);
         }
 
@@ -371,5 +466,12 @@
         private TextBox textBoxRegisterLName;
         private TextBox textBoxRegisterEmail;
         private Button buttonRegisterSubmit;
+        private PictureBox checkmarkPass;
+        private Label errorConfirmPass;
+        private Label errorPass;
+        private Label errorEmail;
+        private Label errorLastName;
+        private Label errorFirstName;
+        private PictureBox checkmarkConfirmPass;
     }
 }

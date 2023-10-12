@@ -25,6 +25,13 @@ namespace CapChat
             panelRegister.Visible = true;
             panelLogin.Visible = false;
             panelRegister.BringToFront();
+            checkmarkPass.Visible = false;
+            checkmarkConfirmPass.Visible = false;
+            errorFirstName.Visible = false;
+            errorLastName.Visible = false;
+            errorEmail.Visible = false;
+            errorPass.Visible = true;
+            errorConfirmPass.Visible = false;
         }
     }
 }
