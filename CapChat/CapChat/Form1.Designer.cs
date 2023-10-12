@@ -39,6 +39,13 @@
             label2 = new Label();
             label1 = new Label();
             panelRegister = new Panel();
+            errorConfirmPass = new Label();
+            errorPass = new Label();
+            errorEmail = new Label();
+            errorLastName = new Label();
+            errorFirstName = new Label();
+            checkmarkConfirmPass = new PictureBox();
+            checkmarkPass = new PictureBox();
             buttonRegisterSubmit = new Button();
             textBoxRegisterConfirmPass = new TextBox();
             textBoxRegisterPass = new TextBox();
@@ -51,17 +58,10 @@
             label6 = new Label();
             label5 = new Label();
             label4 = new Label();
-            checkmarkPass = new PictureBox();
-            checkmarkConfirmPass = new PictureBox();
-            errorFirstName = new Label();
-            errorLastName = new Label();
-            errorEmail = new Label();
-            errorPass = new Label();
-            errorConfirmPass = new Label();
             panelLogin.SuspendLayout();
             panelRegister.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)checkmarkPass).BeginInit();
             ((System.ComponentModel.ISupportInitialize)checkmarkConfirmPass).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)checkmarkPass).BeginInit();
             SuspendLayout();
             // 
             // buttonLoginScreen
@@ -204,6 +204,83 @@
             panelRegister.Size = new Size(786, 385);
             panelRegister.TabIndex = 3;
             // 
+            // errorConfirmPass
+            // 
+            errorConfirmPass.AutoSize = true;
+            errorConfirmPass.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            errorConfirmPass.ForeColor = Color.Red;
+            errorConfirmPass.Location = new Point(577, 194);
+            errorConfirmPass.Name = "errorConfirmPass";
+            errorConfirmPass.Size = new Size(149, 17);
+            errorConfirmPass.TabIndex = 18;
+            errorConfirmPass.Text = "Passwords must match";
+            // 
+            // errorPass
+            // 
+            errorPass.AutoSize = true;
+            errorPass.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            errorPass.ForeColor = Color.Red;
+            errorPass.Location = new Point(577, 144);
+            errorPass.Name = "errorPass";
+            errorPass.Size = new Size(185, 17);
+            errorPass.TabIndex = 17;
+            errorPass.Text = "Must be at least 10 charaters";
+            // 
+            // errorEmail
+            // 
+            errorEmail.AutoSize = true;
+            errorEmail.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            errorEmail.ForeColor = Color.Red;
+            errorEmail.Location = new Point(158, 219);
+            errorEmail.Name = "errorEmail";
+            errorEmail.Size = new Size(63, 17);
+            errorEmail.TabIndex = 16;
+            errorEmail.Text = "Required";
+            // 
+            // errorLastName
+            // 
+            errorLastName.AutoSize = true;
+            errorLastName.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            errorLastName.ForeColor = Color.Red;
+            errorLastName.Location = new Point(158, 164);
+            errorLastName.Name = "errorLastName";
+            errorLastName.Size = new Size(63, 17);
+            errorLastName.TabIndex = 15;
+            errorLastName.Text = "Required";
+            // 
+            // errorFirstName
+            // 
+            errorFirstName.AutoSize = true;
+            errorFirstName.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            errorFirstName.ForeColor = Color.Red;
+            errorFirstName.Location = new Point(158, 111);
+            errorFirstName.Name = "errorFirstName";
+            errorFirstName.Size = new Size(63, 17);
+            errorFirstName.TabIndex = 14;
+            errorFirstName.Text = "Required";
+            // 
+            // checkmarkConfirmPass
+            // 
+            checkmarkConfirmPass.BackColor = Color.Transparent;
+            checkmarkConfirmPass.BackgroundImage = (Image)resources.GetObject("checkmarkConfirmPass.BackgroundImage");
+            checkmarkConfirmPass.BackgroundImageLayout = ImageLayout.Stretch;
+            checkmarkConfirmPass.Location = new Point(740, 170);
+            checkmarkConfirmPass.Name = "checkmarkConfirmPass";
+            checkmarkConfirmPass.Size = new Size(34, 25);
+            checkmarkConfirmPass.TabIndex = 13;
+            checkmarkConfirmPass.TabStop = false;
+            // 
+            // checkmarkPass
+            // 
+            checkmarkPass.BackColor = Color.Transparent;
+            checkmarkPass.BackgroundImage = (Image)resources.GetObject("checkmarkPass.BackgroundImage");
+            checkmarkPass.BackgroundImageLayout = ImageLayout.Stretch;
+            checkmarkPass.Location = new Point(740, 116);
+            checkmarkPass.Name = "checkmarkPass";
+            checkmarkPass.Size = new Size(34, 25);
+            checkmarkPass.TabIndex = 12;
+            checkmarkPass.TabStop = false;
+            // 
             // buttonRegisterSubmit
             // 
             buttonRegisterSubmit.BackColor = Color.LightSkyBlue;
@@ -249,6 +326,7 @@
             textBoxRegisterLName.PlaceholderText = "Last Name";
             textBoxRegisterLName.Size = new Size(168, 25);
             textBoxRegisterLName.TabIndex = 8;
+            textBoxRegisterLName.LostFocus += textBoxRegisterLName_LostFocus;
             // 
             // textBoxRegisterEmail
             // 
@@ -260,6 +338,7 @@
             textBoxRegisterEmail.PlaceholderText = "Email";
             textBoxRegisterEmail.Size = new Size(168, 25);
             textBoxRegisterEmail.TabIndex = 7;
+            textBoxRegisterEmail.LostFocus += textBoxRegisterEmail_LostFocus;
             // 
             // textBoxRegisterFName
             // 
@@ -270,7 +349,8 @@
             textBoxRegisterFName.Name = "textBoxRegisterFName";
             textBoxRegisterFName.PlaceholderText = "First Name";
             textBoxRegisterFName.Size = new Size(168, 25);
-            textBoxRegisterFName.TabIndex = 6;
+            textBoxRegisterFName.TabIndex = 6;            
+            textBoxRegisterFName.LostFocus += textBoxRegisterFName_LostFocus;
             // 
             // label9
             // 
@@ -338,83 +418,6 @@
             label4.TabIndex = 0;
             label4.Text = "Register";
             // 
-            // checkmarkPass
-            // 
-            checkmarkPass.BackColor = Color.Transparent;
-            checkmarkPass.BackgroundImage = (Image)resources.GetObject("checkmarkPass.BackgroundImage");
-            checkmarkPass.BackgroundImageLayout = ImageLayout.Stretch;
-            checkmarkPass.Location = new Point(740, 116);
-            checkmarkPass.Name = "checkmarkPass";
-            checkmarkPass.Size = new Size(34, 25);
-            checkmarkPass.TabIndex = 12;
-            checkmarkPass.TabStop = false;
-            // 
-            // checkmarkConfirmPass
-            // 
-            checkmarkConfirmPass.BackColor = Color.Transparent;
-            checkmarkConfirmPass.BackgroundImage = (Image)resources.GetObject("checkmarkConfirmPass.BackgroundImage");
-            checkmarkConfirmPass.BackgroundImageLayout = ImageLayout.Stretch;
-            checkmarkConfirmPass.Location = new Point(740, 170);
-            checkmarkConfirmPass.Name = "checkmarkConfirmPass";
-            checkmarkConfirmPass.Size = new Size(34, 25);
-            checkmarkConfirmPass.TabIndex = 13;
-            checkmarkConfirmPass.TabStop = false;
-            // 
-            // errorFirstName
-            // 
-            errorFirstName.AutoSize = true;
-            errorFirstName.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            errorFirstName.ForeColor = Color.Red;
-            errorFirstName.Location = new Point(158, 111);
-            errorFirstName.Name = "errorFirstName";
-            errorFirstName.Size = new Size(63, 17);
-            errorFirstName.TabIndex = 14;
-            errorFirstName.Text = "Required";
-            // 
-            // errorLastName
-            // 
-            errorLastName.AutoSize = true;
-            errorLastName.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            errorLastName.ForeColor = Color.Red;
-            errorLastName.Location = new Point(158, 164);
-            errorLastName.Name = "errorLastName";
-            errorLastName.Size = new Size(63, 17);
-            errorLastName.TabIndex = 15;
-            errorLastName.Text = "Required";
-            // 
-            // errorEmail
-            // 
-            errorEmail.AutoSize = true;
-            errorEmail.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            errorEmail.ForeColor = Color.Red;
-            errorEmail.Location = new Point(158, 219);
-            errorEmail.Name = "errorEmail";
-            errorEmail.Size = new Size(63, 17);
-            errorEmail.TabIndex = 16;
-            errorEmail.Text = "Required";
-            // 
-            // errorPass
-            // 
-            errorPass.AutoSize = true;
-            errorPass.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            errorPass.ForeColor = Color.Red;
-            errorPass.Location = new Point(577, 144);
-            errorPass.Name = "errorPass";
-            errorPass.Size = new Size(185, 17);
-            errorPass.TabIndex = 17;
-            errorPass.Text = "Must be at least 10 charaters";
-            // 
-            // errorConfirmPass
-            // 
-            errorConfirmPass.AutoSize = true;
-            errorConfirmPass.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            errorConfirmPass.ForeColor = Color.Red;
-            errorConfirmPass.Location = new Point(577, 194);
-            errorConfirmPass.Name = "errorConfirmPass";
-            errorConfirmPass.Size = new Size(149, 17);
-            errorConfirmPass.TabIndex = 18;
-            errorConfirmPass.Text = "Passwords must match";
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -437,8 +440,8 @@
             panelLogin.PerformLayout();
             panelRegister.ResumeLayout(false);
             panelRegister.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)checkmarkPass).EndInit();
             ((System.ComponentModel.ISupportInitialize)checkmarkConfirmPass).EndInit();
+            ((System.ComponentModel.ISupportInitialize)checkmarkPass).EndInit();
             ResumeLayout(false);
         }
 
