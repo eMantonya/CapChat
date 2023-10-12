@@ -20,5 +20,6 @@ namespace ClientTests
 
             Assert.AreEqual(expected, result);
         }
+
     }
 }
