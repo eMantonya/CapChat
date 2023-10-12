@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.4.33205.214
+VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientGUI", "CapChat\ClientGUI.csproj", "{5E88344E-4D8E-4314-8B0B-FCDD87EEBF29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientGUI", "CapChat\ClientGUI.csproj", "{328A69C8-3D1A-4961-952E-4875CF34A562}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5E88344E-4D8E-4314-8B0B-FCDD87EEBF29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5E88344E-4D8E-4314-8B0B-FCDD87EEBF29}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5E88344E-4D8E-4314-8B0B-FCDD87EEBF29}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5E88344E-4D8E-4314-8B0B-FCDD87EEBF29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{328A69C8-3D1A-4961-952E-4875CF34A562}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{328A69C8-3D1A-4961-952E-4875CF34A562}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{328A69C8-3D1A-4961-952E-4875CF34A562}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{328A69C8-3D1A-4961-952E-4875CF34A562}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {CBD51223-3B22-49DB-94FE-E148F14C1FBA}
+		SolutionGuid = {DEA1576D-1826-458E-80B3-290DFF8F55CD}
 	EndGlobalSection
 EndGlobal
