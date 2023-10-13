@@ -34,7 +34,7 @@ namespace UserLibrary
             {
                 connection.Open();
 
-                string sql = @"INSERT INTO [User] (UserFirstName, UserLastName, UserEmail, UserPassHash) VALUES (@first, @last, @email, @hash)";
+                string sql = @"INSERT INTO [User] (UserFirstName, UserLastName, UserEmail, UserPassHash, UserSalt) VALUES (@first, @last, @email, @hash, @salt)";
 
                 using (var command = new SqlCommand(sql, connection))
                 {
@@ -42,6 +42,7 @@ namespace UserLibrary
                     command.Parameters.AddWithValue("@last", LastName);
                     command.Parameters.AddWithValue("@email", Email);
                     command.Parameters.AddWithValue("@hash", _passwordHash);
+                    command.Parameters.AddWithValue("@salt", _salt);
 
                     int rowsAffected = command.ExecuteNonQuery();
                 }

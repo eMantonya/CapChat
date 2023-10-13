@@ -50,22 +50,11 @@ namespace CapChat
         }
         private void textBoxRegisterPass_LostFocus(object sender, EventArgs e)
         {
-            string pass = textBoxRegisterPass.Text;
-            if (pass.Length < 10)
-            {
-                errorPass.Visible = true;
-            } else { errorPass.Visible = false; }
+            errorPass.Visible = textBoxRegisterPass.Text.Length < 10;
         }
         private void textBoxRegisterConfirmPass_LostFocus(object sender, EventArgs e)
         {
-            string pass = textBoxRegisterPass.Text;
-            string confirmPass = textBoxRegisterConfirmPass.Text;
-
-            if (String.Compare(pass, confirmPass) != 0)
-            {
-                errorConfirmPass.Visible = true;
-            }
-            else { errorPass.Visible = false; }
+            errorConfirmPass.Visible = string.Compare(textBoxRegisterPass.Text, textBoxRegisterConfirmPass.Text) != 0;
         }
 
         private void buttonRegisterSubmit_Click(object sender, EventArgs e)
@@ -86,6 +75,16 @@ namespace CapChat
                 textBoxRegisterEmail_LostFocus(sender, e);
                 MessageBox.Show("Please correct any errors and try again", "Register Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void textBoxRegisterPass_TextChanged(object sender, EventArgs e)
+        {
+            checkmarkPass.Visible = textBoxRegisterPass.Text.Length >= 10;
+        }
+
+        private void textBoxRegisterConfirmPass_TextChanged(object sender, EventArgs e)
+        {
+            checkmarkConfirmPass.Visible = string.Compare(textBoxRegisterPass.Text, textBoxRegisterConfirmPass.Text) == 0;
         }
     }
 }

@@ -209,7 +209,7 @@
             errorConfirmPass.AutoSize = true;
             errorConfirmPass.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             errorConfirmPass.ForeColor = Color.Red;
-            errorConfirmPass.Location = new Point(577, 194);
+            errorConfirmPass.Location = new Point(443, 191);
             errorConfirmPass.Name = "errorConfirmPass";
             errorConfirmPass.Size = new Size(149, 17);
             errorConfirmPass.TabIndex = 18;
@@ -220,7 +220,7 @@
             errorPass.AutoSize = true;
             errorPass.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             errorPass.ForeColor = Color.Red;
-            errorPass.Location = new Point(577, 144);
+            errorPass.Location = new Point(443, 144);
             errorPass.Name = "errorPass";
             errorPass.Size = new Size(185, 17);
             errorPass.TabIndex = 17;
@@ -264,9 +264,9 @@
             checkmarkConfirmPass.BackColor = Color.Transparent;
             checkmarkConfirmPass.BackgroundImage = (Image)resources.GetObject("checkmarkConfirmPass.BackgroundImage");
             checkmarkConfirmPass.BackgroundImageLayout = ImageLayout.Stretch;
-            checkmarkConfirmPass.Location = new Point(740, 170);
+            checkmarkConfirmPass.Location = new Point(733, 157);
             checkmarkConfirmPass.Name = "checkmarkConfirmPass";
-            checkmarkConfirmPass.Size = new Size(34, 25);
+            checkmarkConfirmPass.Size = new Size(48, 38);
             checkmarkConfirmPass.TabIndex = 13;
             checkmarkConfirmPass.TabStop = false;
             // 
@@ -275,9 +275,9 @@
             checkmarkPass.BackColor = Color.Transparent;
             checkmarkPass.BackgroundImage = (Image)resources.GetObject("checkmarkPass.BackgroundImage");
             checkmarkPass.BackgroundImageLayout = ImageLayout.Stretch;
-            checkmarkPass.Location = new Point(740, 116);
+            checkmarkPass.Location = new Point(733, 110);
             checkmarkPass.Name = "checkmarkPass";
-            checkmarkPass.Size = new Size(34, 25);
+            checkmarkPass.Size = new Size(48, 38);
             checkmarkPass.TabIndex = 12;
             checkmarkPass.TabStop = false;
             // 
@@ -300,11 +300,12 @@
             textBoxRegisterConfirmPass.BackColor = Color.SlateGray;
             textBoxRegisterConfirmPass.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             textBoxRegisterConfirmPass.ForeColor = Color.LightSkyBlue;
-            textBoxRegisterConfirmPass.Location = new Point(577, 170);
+            textBoxRegisterConfirmPass.Location = new Point(564, 164);
             textBoxRegisterConfirmPass.Name = "textBoxRegisterConfirmPass";
             textBoxRegisterConfirmPass.PlaceholderText = "Confirm Password";
             textBoxRegisterConfirmPass.Size = new Size(168, 25);
-            textBoxRegisterConfirmPass.TabIndex = 10;
+            textBoxRegisterConfirmPass.TabIndex = 5;
+            textBoxRegisterConfirmPass.TextChanged += textBoxRegisterConfirmPass_TextChanged;
             textBoxRegisterConfirmPass.LostFocus += textBoxRegisterConfirmPass_LostFocus;
             // 
             // textBoxRegisterPass
@@ -312,11 +313,12 @@
             textBoxRegisterPass.BackColor = Color.SlateGray;
             textBoxRegisterPass.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             textBoxRegisterPass.ForeColor = Color.LightSkyBlue;
-            textBoxRegisterPass.Location = new Point(577, 116);
+            textBoxRegisterPass.Location = new Point(564, 117);
             textBoxRegisterPass.Name = "textBoxRegisterPass";
             textBoxRegisterPass.PlaceholderText = "Password";
             textBoxRegisterPass.Size = new Size(168, 25);
-            textBoxRegisterPass.TabIndex = 9;
+            textBoxRegisterPass.TabIndex = 4;
+            textBoxRegisterPass.TextChanged += textBoxRegisterPass_TextChanged;
             textBoxRegisterPass.LostFocus += textBoxRegisterPass_LostFocus;
             // 
             // textBoxRegisterLName
@@ -328,7 +330,7 @@
             textBoxRegisterLName.Name = "textBoxRegisterLName";
             textBoxRegisterLName.PlaceholderText = "Last Name";
             textBoxRegisterLName.Size = new Size(168, 25);
-            textBoxRegisterLName.TabIndex = 8;
+            textBoxRegisterLName.TabIndex = 2;
             textBoxRegisterLName.LostFocus += textBoxRegisterLName_LostFocus;
             // 
             // textBoxRegisterEmail
@@ -340,7 +342,7 @@
             textBoxRegisterEmail.Name = "textBoxRegisterEmail";
             textBoxRegisterEmail.PlaceholderText = "Email";
             textBoxRegisterEmail.Size = new Size(168, 25);
-            textBoxRegisterEmail.TabIndex = 7;
+            textBoxRegisterEmail.TabIndex = 3;
             textBoxRegisterEmail.LostFocus += textBoxRegisterEmail_LostFocus;
             // 
             // textBoxRegisterFName
@@ -352,7 +354,7 @@
             textBoxRegisterFName.Name = "textBoxRegisterFName";
             textBoxRegisterFName.PlaceholderText = "First Name";
             textBoxRegisterFName.Size = new Size(168, 25);
-            textBoxRegisterFName.TabIndex = 6;
+            textBoxRegisterFName.TabIndex = 1;
             textBoxRegisterFName.LostFocus += textBoxRegisterFName_LostFocus;
             // 
             // label9
@@ -360,7 +362,7 @@
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
             label9.ForeColor = Color.LightSkyBlue;
-            label9.Location = new Point(383, 162);
+            label9.Location = new Point(370, 164);
             label9.Name = "label9";
             label9.Size = new Size(188, 28);
             label9.TabIndex = 5;
@@ -371,7 +373,7 @@
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
             label8.ForeColor = Color.LightSkyBlue;
-            label8.Location = new Point(465, 111);
+            label8.Location = new Point(452, 111);
             label8.Name = "label8";
             label8.Size = new Size(106, 28);
             label8.TabIndex = 4;
