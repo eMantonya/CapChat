@@ -293,6 +293,7 @@
             buttonRegisterSubmit.TabIndex = 11;
             buttonRegisterSubmit.Text = "Register";
             buttonRegisterSubmit.UseVisualStyleBackColor = false;
+            buttonRegisterSubmit.Click += buttonRegisterSubmit_Click;
             // 
             // textBoxRegisterConfirmPass
             // 
@@ -304,6 +305,7 @@
             textBoxRegisterConfirmPass.PlaceholderText = "Confirm Password";
             textBoxRegisterConfirmPass.Size = new Size(168, 25);
             textBoxRegisterConfirmPass.TabIndex = 10;
+            textBoxRegisterConfirmPass.LostFocus += textBoxRegisterConfirmPass_LostFocus;
             // 
             // textBoxRegisterPass
             // 
@@ -315,6 +317,7 @@
             textBoxRegisterPass.PlaceholderText = "Password";
             textBoxRegisterPass.Size = new Size(168, 25);
             textBoxRegisterPass.TabIndex = 9;
+            textBoxRegisterPass.LostFocus += textBoxRegisterPass_LostFocus;
             // 
             // textBoxRegisterLName
             // 
@@ -349,7 +352,7 @@
             textBoxRegisterFName.Name = "textBoxRegisterFName";
             textBoxRegisterFName.PlaceholderText = "First Name";
             textBoxRegisterFName.Size = new Size(168, 25);
-            textBoxRegisterFName.TabIndex = 6;            
+            textBoxRegisterFName.TabIndex = 6;
             textBoxRegisterFName.LostFocus += textBoxRegisterFName_LostFocus;
             // 
             // label9
