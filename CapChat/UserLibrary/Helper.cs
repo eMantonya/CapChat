@@ -69,7 +69,7 @@ namespace UserLibrary
                                 //if password matches, return the user--login is successful
                                 if (cryptoHelper.VerifyHash(inputPass, userPassHash, userSalt))
                                 {
-                                    return new User(userFname, userLname, userEmail, inputPass);
+                                    return new User(userFname, userLname, userEmail, userSalt, userPassHash);
                                 }
                                 
                             }

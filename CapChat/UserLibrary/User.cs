@@ -16,6 +16,7 @@ namespace UserLibrary
         private byte[] _salt;
         public bool Stored = false;
 
+        //constructor called during registration
         public User(string firstName, string lastName, string email, string password)
         {
             _salt = RandomNumberGenerator.GetBytes(64);
@@ -24,6 +25,16 @@ namespace UserLibrary
             Email = email;
             _passwordHash = _cHelper.ComputeHash(password, this._salt);
             this.StoreUser();
+        }
+
+        //constructor called during login
+        public User(string firstName, string lastName, string email, byte[]salt, byte[]passHash)
+        {
+            _salt = salt;
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            _passwordHash = passHash;
         }
 
         private void StoreUser()
