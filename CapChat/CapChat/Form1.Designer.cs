@@ -32,6 +32,10 @@
             buttonLoginScreen = new Button();
             buttonRegisterScreen = new Button();
             panelLogin = new Panel();
+            labelLoginPass = new Label();
+            labelLoginEmail = new Label();
+            labelRegisterSuccess2 = new Label();
+            labelRegisterSuccess = new Label();
             buttonLoginConfirm = new Button();
             textBoxLoginPass = new TextBox();
             textBoxLoginEmail = new TextBox();
@@ -95,6 +99,10 @@
             // panelLogin
             // 
             panelLogin.BackColor = Color.Transparent;
+            panelLogin.Controls.Add(labelLoginPass);
+            panelLogin.Controls.Add(labelLoginEmail);
+            panelLogin.Controls.Add(labelRegisterSuccess2);
+            panelLogin.Controls.Add(labelRegisterSuccess);
             panelLogin.Controls.Add(buttonLoginConfirm);
             panelLogin.Controls.Add(textBoxLoginPass);
             panelLogin.Controls.Add(textBoxLoginEmail);
@@ -108,6 +116,48 @@
             panelLogin.Size = new Size(786, 385);
             panelLogin.TabIndex = 2;
             // 
+            // labelLoginPass
+            // 
+            labelLoginPass.AutoSize = true;
+            labelLoginPass.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            labelLoginPass.ForeColor = Color.Red;
+            labelLoginPass.Location = new Point(332, 211);
+            labelLoginPass.Name = "labelLoginPass";
+            labelLoginPass.Size = new Size(72, 20);
+            labelLoginPass.TabIndex = 9;
+            labelLoginPass.Text = "Required";
+            labelLoginPass.UseMnemonic = false;
+            // 
+            // labelLoginEmail
+            // 
+            labelLoginEmail.AutoSize = true;
+            labelLoginEmail.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            labelLoginEmail.ForeColor = Color.Red;
+            labelLoginEmail.Location = new Point(332, 150);
+            labelLoginEmail.Name = "labelLoginEmail";
+            labelLoginEmail.Size = new Size(72, 20);
+            labelLoginEmail.TabIndex = 8;
+            labelLoginEmail.Text = "Required";
+            labelLoginEmail.UseMnemonic = false;
+            // 
+            // labelRegisterSuccess2
+            // 
+            labelRegisterSuccess2.AutoSize = true;
+            labelRegisterSuccess2.ForeColor = Color.Lime;
+            labelRegisterSuccess2.Location = new Point(321, 79);
+            labelRegisterSuccess2.Name = "labelRegisterSuccess2";
+            labelRegisterSuccess2.Size = new Size(0, 25);
+            labelRegisterSuccess2.TabIndex = 7;
+            // 
+            // labelRegisterSuccess
+            // 
+            labelRegisterSuccess.AutoSize = true;
+            labelRegisterSuccess.ForeColor = Color.Lime;
+            labelRegisterSuccess.Location = new Point(302, 56);
+            labelRegisterSuccess.Name = "labelRegisterSuccess";
+            labelRegisterSuccess.Size = new Size(0, 25);
+            labelRegisterSuccess.TabIndex = 6;
+            // 
             // buttonLoginConfirm
             // 
             buttonLoginConfirm.BackColor = Color.LightSkyBlue;
@@ -119,6 +169,7 @@
             buttonLoginConfirm.TabIndex = 5;
             buttonLoginConfirm.Text = "Login";
             buttonLoginConfirm.UseVisualStyleBackColor = false;
+            buttonLoginConfirm.Click += buttonLoginConfirm_Click;
             // 
             // textBoxLoginPass
             // 
@@ -131,6 +182,7 @@
             textBoxLoginPass.PlaceholderText = "Password";
             textBoxLoginPass.Size = new Size(210, 25);
             textBoxLoginPass.TabIndex = 4;
+            textBoxLoginPass.TextChanged += textBoxLoginPass_TextChanged;
             // 
             // textBoxLoginEmail
             // 
@@ -142,6 +194,7 @@
             textBoxLoginEmail.PlaceholderText = "Email";
             textBoxLoginEmail.Size = new Size(210, 25);
             textBoxLoginEmail.TabIndex = 3;
+            textBoxLoginEmail.TextChanged += textBoxLoginEmail_TextChanged;
             // 
             // label3
             // 
@@ -199,7 +252,7 @@
             panelRegister.Controls.Add(label5);
             panelRegister.Controls.Add(label4);
             panelRegister.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            panelRegister.Location = new Point(0, 76);
+            panelRegister.Location = new Point(734, 49);
             panelRegister.Name = "panelRegister";
             panelRegister.Size = new Size(786, 385);
             panelRegister.TabIndex = 3;
@@ -481,5 +534,9 @@
         private Label errorLastName;
         private Label errorFirstName;
         private PictureBox checkmarkConfirmPass;
+        private Label labelRegisterSuccess2;
+        private Label labelRegisterSuccess;
+        private Label labelLoginEmail;
+        private Label labelLoginPass;
     }
 }
