@@ -252,7 +252,7 @@
             panelRegister.Controls.Add(label5);
             panelRegister.Controls.Add(label4);
             panelRegister.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            panelRegister.Location = new Point(734, 49);
+            panelRegister.Location = new Point(-1, 76);
             panelRegister.Name = "panelRegister";
             panelRegister.Size = new Size(786, 385);
             panelRegister.TabIndex = 3;

@@ -38,6 +38,34 @@ namespace UserLibrary
 
     public static class DbHelper
     {
+
+        public static bool UserExists(string email)
+        {
+            bool recordsExists = false;
+            var config = new ConfigurationBuilder().AddUserSecrets<User>().Build();
+            string connString = config["connString"];
+
+            using (var connection = new SqlConnection(connString))
+            {
+                connection.Open();
+                //search DB for a user where the email matches, email is unique field
+                string sql = @"SELECT * FROM [User] WHERE UserEmail = @email";
+                using (var command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@email", email);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            recordsExists = true;
+                        }
+                    }
+                }
+            }
+            return recordsExists;
+         
+        }
         public static User? RetrieveUser(string email, string inputPass)
         {
             //set up db connection

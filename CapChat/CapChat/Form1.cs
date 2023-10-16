@@ -1,3 +1,4 @@
+using System.Diagnostics.Eventing.Reader;
 using UserLibrary;
 
 namespace CapChat
@@ -49,7 +50,19 @@ namespace CapChat
         }
         private void textBoxRegisterEmail_LostFocus(object sender, EventArgs e)
         {
-            errorEmail.Visible = string.IsNullOrEmpty(textBoxRegisterEmail.Text);
+
+            if (string.IsNullOrEmpty(textBoxRegisterEmail.Text))
+            {
+                errorEmail.Text = "Required";
+                errorEmail.Visible = true;
+            }
+            else if (DbHelper.UserExists(textBoxRegisterEmail.Text))
+            {
+                    errorEmail.Text = "Account with given email already created..";
+                    errorEmail.Visible = true;
+            }
+            else { errorEmail.Visible = false; }
+            
         }
         private void textBoxRegisterPass_LostFocus(object sender, EventArgs e)
         {
@@ -143,7 +156,7 @@ namespace CapChat
         private void textBoxLoginPass_TextChanged(object sender, EventArgs e)
         {
             labelLoginPass.Visible = this.Text.Length < 10;
-            
+
         }
     }
 }
