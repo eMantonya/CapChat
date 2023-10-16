@@ -14,7 +14,9 @@ namespace UserLibrary
         public string Email { get; set; }
         private byte[] _passwordHash;
         private byte[] _salt;
+        public bool Stored = false;
 
+        //constructor called during registration
         public User(string firstName, string lastName, string email, string password)
         {
             _salt = RandomNumberGenerator.GetBytes(64);
@@ -25,31 +27,52 @@ namespace UserLibrary
             this.StoreUser();
         }
 
+        //constructor called during login
+        public User(string firstName, string lastName, string email, byte[]salt, byte[]passHash)
+        {
+            _salt = salt;
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            _passwordHash = passHash;
+        }
+
         private void StoreUser()
         {
             var config = new ConfigurationBuilder().AddUserSecrets<User>().Build();
             string connString = config["connString"];
-
-            using (var connection = new SqlConnection(connString))
+            try
             {
-                connection.Open();
-
-                string sql = @"INSERT INTO [User] (UserFirstName, UserLastName, UserEmail, UserPassHash, UserSalt) VALUES (@first, @last, @email, @hash, @salt)";
-
-                using (var command = new SqlCommand(sql, connection))
+                using (var connection = new SqlConnection(connString))
                 {
-                    command.Parameters.AddWithValue("@first", FirstName);
-                    command.Parameters.AddWithValue("@last", LastName);
-                    command.Parameters.AddWithValue("@email", Email);
-                    command.Parameters.AddWithValue("@hash", _passwordHash);
-                    command.Parameters.AddWithValue("@salt", _salt);
+                    connection.Open();
 
-                    int rowsAffected = command.ExecuteNonQuery();
+                    string sql = @"INSERT INTO [User] (UserFirstName, UserLastName, UserEmail, UserPassHash, UserSalt) VALUES (@first, @last, @email, @hash, @salt)";
+
+                    using (var command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@first", FirstName);
+                        command.Parameters.AddWithValue("@last", LastName);
+                        command.Parameters.AddWithValue("@email", Email);
+                        command.Parameters.AddWithValue("@hash", _passwordHash);
+                        command.Parameters.AddWithValue("@salt", _salt);
+
+                        int rowsAffected = command.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            this.Stored = true;
+                        }
+                    }
                 }
             }
-
+            catch
+            {
+                this.Stored = false;
+            }
         }
     }
+
+    
 
   
 }
