@@ -16,6 +16,8 @@ namespace UserLibrary
         private byte[] _salt;
         public bool Stored = false;
 
+        public User() { }
+
         //constructor called during registration
         public User(string firstName, string lastName, string email, string password)
         {
