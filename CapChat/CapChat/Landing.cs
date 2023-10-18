@@ -72,6 +72,7 @@ namespace CapChat
                 errorEmail.Visible = true;
             }
             else { errorEmail.Visible = false; }
+            
 
         }
         private void textBoxRegisterPass_LostFocus(object sender, EventArgs e)

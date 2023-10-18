@@ -31,8 +31,10 @@ namespace CapChat
         private void Profile_Load(object sender, EventArgs e)
         {
             Landing landing = new Landing();
-            
-            labelProfileGreeting.Text = "Hello, " + _currentUser.FirstName + " " + _currentUser.LastName;
+
+            labelProfileGreeting.Text = "Hello";
+            labelProfileName.Text = _currentUser.FirstName + " " + _currentUser.LastName;
         }
+
     }
 }

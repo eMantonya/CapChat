@@ -490,6 +490,7 @@
             Controls.Add(buttonLoginScreen);
             DoubleBuffered = true;
             ForeColor = SystemColors.ControlDarkDark;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "Landing";
             ShowIcon = false;
             Text = "CapChat";

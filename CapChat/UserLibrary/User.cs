@@ -3,6 +3,11 @@ using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
+using System.Drawing;
+using System;
+using System.IO;
+
+
 
 namespace UserLibrary
 {
@@ -12,10 +17,10 @@ namespace UserLibrary
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+
         private byte[] _passwordHash;
         private byte[] _salt;
         public bool Stored = false;
-
         public User() { }
 
         //constructor called during registration
@@ -57,6 +62,7 @@ namespace UserLibrary
                         command.Parameters.AddWithValue("@last", LastName);
                         command.Parameters.AddWithValue("@email", Email);
                         command.Parameters.AddWithValue("@hash", _passwordHash);
+                        //command.Parameters.AddWithValue("@avatar", Avatar);
                         command.Parameters.AddWithValue("@salt", _salt);
 
                         int rowsAffected = command.ExecuteNonQuery();
