@@ -36,5 +36,25 @@ namespace CapChat
             labelProfileName.Text = _currentUser.FirstName + " " + _currentUser.LastName;
         }
 
+        private void navToggle_Click(object sender, EventArgs e)
+        {
+            if (panelNavigation.Size == panelNavigation.MaximumSize)
+            {           
+                while (panelNavigation.Size != panelNavigation.MinimumSize)
+                {
+                    panelNavigation.Width -= 5;
+                }
+
+                panelNavigation.Size = panelNavigation.MinimumSize;
+                panelNavigation.BackColor = Color.Transparent;
+                panelNavButtons.BackColor = Color.Transparent;
+            }
+            else
+            {
+                panelNavigation.Size = panelNavigation.MaximumSize;
+                panelNavigation.BackColor = Color.SlateGray;
+                panelNavButtons.BackColor = Color.SlateGray;
+            }
+        }
     }
 }
