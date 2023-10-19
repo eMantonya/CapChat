@@ -69,12 +69,15 @@
             label8 = new Label();
             label7 = new Label();
             label6 = new Label();
+            panelChat = new Panel();
+            Placeholder = new Label();
             panelNavigation.SuspendLayout();
             panelNavButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)navToggle).BeginInit();
             panelAccount.SuspendLayout();
             panelEditProfile.SuspendLayout();
             panelChangePassword.SuspendLayout();
+            panelChat.SuspendLayout();
             SuspendLayout();
             // 
             // buttonLogout
@@ -582,6 +585,26 @@
             label6.TabIndex = 0;
             label6.Text = "Change Password";
             // 
+            // panelChat
+            // 
+            panelChat.BackColor = Color.Transparent;
+            panelChat.Controls.Add(Placeholder);
+            panelChat.Location = new Point(51, 0);
+            panelChat.Name = "panelChat";
+            panelChat.Size = new Size(731, 462);
+            panelChat.TabIndex = 11;
+            // 
+            // Placeholder
+            // 
+            Placeholder.AutoSize = true;
+            Placeholder.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            Placeholder.ForeColor = Color.LightSkyBlue;
+            Placeholder.Location = new Point(260, 40);
+            Placeholder.Name = "Placeholder";
+            Placeholder.Size = new Size(148, 32);
+            Placeholder.TabIndex = 0;
+            Placeholder.Text = "Placeholder";
+            // 
             // Profile
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -590,6 +613,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(784, 461);
+            Controls.Add(panelChat);
             Controls.Add(panelChangePassword);
             Controls.Add(panelAccount);
             Controls.Add(panelEditProfile);
@@ -610,6 +634,8 @@
             panelEditProfile.PerformLayout();
             panelChangePassword.ResumeLayout(false);
             panelChangePassword.PerformLayout();
+            panelChat.ResumeLayout(false);
+            panelChat.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -655,5 +681,7 @@
         private Label labelNewPass;
         private Label labelCurrentPass;
         private Button buttonCancelPassChange;
+        private Panel panelChat;
+        private Label Placeholder;
     }
 }

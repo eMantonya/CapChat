@@ -37,13 +37,13 @@ namespace CapChat
 
             panelNavigation.Size = MinimumSize;
             panelNavigation.BackColor = Color.Transparent;
-            
+
             buttonAccount.BackColor = Color.Transparent;
             buttonChat.BackColor = Color.Transparent;
             buttonLogout.BackColor = Color.Transparent;
             labelEditSuccess.Visible = false;
             panelChangePassword.Visible = false;
-            
+
 
             panelAccount.Visible = true;
             panelChangePassword.Visible = false;
@@ -85,7 +85,7 @@ namespace CapChat
             }
         }
 
-        
+
 
         private void buttonAccount_Click(object sender, EventArgs e)
         {
@@ -96,7 +96,7 @@ namespace CapChat
             labelFirstName.Text = _currentUser.FirstName;
             labelLastName.Text = _currentUser.LastName;
             labelEmail.Text = _currentUser.Email;
-            navToggle_Click(this, e);
+            //navToggle_Click(this, e);
         }
 
         private void buttonSubmitEdit_Click(object sender, EventArgs e)
