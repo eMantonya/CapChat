@@ -41,6 +41,7 @@ namespace CapChat
             buttonAccount.BackColor = Color.Transparent;
             buttonChat.BackColor = Color.Transparent;
             buttonLogout.BackColor = Color.Transparent;
+            labelEditSuccess.Visible = false;
             panelHome.Visible = false;
             buttonAccount_Click(sender, e);
 
@@ -81,7 +82,8 @@ namespace CapChat
         private void buttonHome_Click(object sender, EventArgs e)
         {
             panelHome.Visible = true;
-            //panelAccount.Visible = false;
+            panelAccount.Visible = false;
+            panelHome.BringToFront();
             //panelChat.Visible = false;
             //panelSettings.Visible = false;
             //panelHelp.Visible = false;
@@ -91,9 +93,106 @@ namespace CapChat
         {
             panelAccount.Visible = true;
             panelAccount.BringToFront();
+            labelEditSuccess.Visible = false;
             labelFirstName.Text = _currentUser.FirstName;
             labelLastName.Text = _currentUser.LastName;
             labelEmail.Text = _currentUser.Email;
+        }
+
+        private void buttonSubmitEdit_Click(object sender, EventArgs e)
+        {
+            if (_currentUser.UpdateUserName(textBoxFirstNameUpdate.Text, textBoxLastNameUpdate.Text))
+            {
+                panelEditProfile.Visible = false;
+                panelAccount.Visible = true;
+                panelAccount.BringToFront();
+                labelEditSuccess.Text = "Account updated";
+                labelEditSuccess.Visible = true;
+                labelFirstName.Text = _currentUser.FirstName;
+                labelLastName.Text = _currentUser.LastName;
+                labelProfileName.Text = _currentUser.FirstName + "  " + _currentUser.LastName;
+            }
+            else
+            {
+                panelEditProfile.Visible = false;
+                panelAccount.Visible = true;
+                panelAccount.BringToFront();
+                labelEditSuccess.Visible = true;
+                labelEditSuccess.Text = "Unsuccessful..";
+
+            }
+        }
+
+        private void buttonEditAccount_Click(object sender, EventArgs e)
+        {
+            panelAccount.Visible = false;
+            panelEditProfile.Visible = true;
+            textBoxFirstNameUpdate.Text = "";
+            textBoxLastNameUpdate.Text = "";
+            panelEditProfile.BringToFront();
+        }
+
+        private void buttonCancelEdit_Click(object sender, EventArgs e)
+        {
+            buttonAccount_Click(sender, e);
+        }
+
+        private void buttonChangePassword_Click(object sender, EventArgs e)
+        {
+            panelAccount.Visible = false;
+            panelEditProfile.Visible = false;
+            panelChangePassword.Visible = true;
+            panelChangePassword.BringToFront();
+            labelCurrentPass.Visible = false;
+            labelNewPass.Visible = false;
+            labelConfirmPass.Visible = false;
+        }
+
+        private void buttonChangePassConfirm_Click(object sender, EventArgs e)
+        {
+            string oldPass = textBoxCurrentPass.Text;
+            string newPass = textBoxNewPass.Text;
+            string confirmPass = textBoxConfirmPass.Text;
+            if (newPass != confirmPass)
+            {
+                MessageBox.Show("Passwords must match", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (newPass.Length < 10)
+            {
+                MessageBox.Show("Password must be at least 10 characters long", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (!_currentUser.VerifyPassword(oldPass))
+            {
+                MessageBox.Show("Check password and try again", "Invalid Password", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if (!_currentUser.UpdateUserPassword(oldPass))
+            {
+                MessageBox.Show("Failed to update Password", "Internal Server Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            panelEditProfile.Visible = false;
+            panelChangePassword.Visible = false;
+            panelAccount.Visible = true;
+            panelAccount.BringToFront();
+            labelEditSuccess.Text = "Password Changed";
+            labelEditSuccess.Visible = true;
+        }
+
+        private void textBoxCurrentPass_TextChanged(object sender, EventArgs e)
+        {
+            labelCurrentPass.Visible = (textBoxCurrentPass.Text.Length == 0);
+        }
+
+        private void textBoxNewPass_TextChanged(object sender, EventArgs e)
+        {
+            labelNewPass.Visible = (textBoxNewPass.Text.Length == 0);
+        }
+
+        private void textBoxConfirmPass_LostFocus(object sender, EventArgs e)
+        {
+            labelConfirmPass.Visible = (textBoxConfirmPass.Text == textBoxNewPass.Text);
         }
     }
 }

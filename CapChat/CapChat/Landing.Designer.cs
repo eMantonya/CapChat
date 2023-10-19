@@ -355,6 +355,7 @@
             textBoxRegisterConfirmPass.ForeColor = Color.LightSkyBlue;
             textBoxRegisterConfirmPass.Location = new Point(564, 164);
             textBoxRegisterConfirmPass.Name = "textBoxRegisterConfirmPass";
+            textBoxRegisterConfirmPass.PasswordChar = '*';
             textBoxRegisterConfirmPass.PlaceholderText = "Confirm Password";
             textBoxRegisterConfirmPass.Size = new Size(168, 25);
             textBoxRegisterConfirmPass.TabIndex = 5;
@@ -368,6 +369,7 @@
             textBoxRegisterPass.ForeColor = Color.LightSkyBlue;
             textBoxRegisterPass.Location = new Point(564, 117);
             textBoxRegisterPass.Name = "textBoxRegisterPass";
+            textBoxRegisterPass.PasswordChar = '*';
             textBoxRegisterPass.PlaceholderText = "Password";
             textBoxRegisterPass.Size = new Size(168, 25);
             textBoxRegisterPass.TabIndex = 4;

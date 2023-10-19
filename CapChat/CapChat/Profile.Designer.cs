@@ -41,6 +41,7 @@
             panelHome = new Panel();
             label1 = new Label();
             panelAccount = new Panel();
+            labelEditSuccess = new Label();
             buttonChangePassword = new Button();
             buttonEditAccount = new Button();
             labelLastName = new Label();
@@ -51,24 +52,39 @@
             label3 = new Label();
             label2 = new Label();
             panelEditProfile = new Panel();
+            buttonCancelEdit = new Button();
+            textBoxLastNameUpdate = new TextBox();
+            textBoxFirstNameUpdate = new TextBox();
             buttonSubmitEdit = new Button();
             label9 = new Label();
             label10 = new Label();
             label12 = new Label();
-            textBoxFirstNameUpdate = new TextBox();
-            textBoxLastNameUpdate = new TextBox();
-            buttonCancelEdit = new Button();
+            panelChangePassword = new Panel();
+            buttonChangePassConfirm = new Button();
+            textBoxConfirmPass = new TextBox();
+            textBoxNewPass = new TextBox();
+            textBoxCurrentPass = new TextBox();
+            label11 = new Label();
+            label8 = new Label();
+            label7 = new Label();
+            label6 = new Label();
+            labelCurrentPass = new Label();
+            labelNewPass = new Label();
+            labelConfirmPass = new Label();
             panelNavigation.SuspendLayout();
             panelNavButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)navToggle).BeginInit();
             panelHome.SuspendLayout();
             panelAccount.SuspendLayout();
             panelEditProfile.SuspendLayout();
+            panelChangePassword.SuspendLayout();
             SuspendLayout();
             // 
             // buttonLogout
             // 
             buttonLogout.BackColor = Color.SlateGray;
+            buttonLogout.BackgroundImageLayout = ImageLayout.Stretch;
+            buttonLogout.Cursor = Cursors.Hand;
             buttonLogout.FlatAppearance.BorderSize = 0;
             buttonLogout.FlatStyle = FlatStyle.Flat;
             buttonLogout.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
@@ -104,7 +120,7 @@
             panelNavigation.MaximumSize = new Size(177, 462);
             panelNavigation.MinimumSize = new Size(50, 462);
             panelNavigation.Name = "panelNavigation";
-            panelNavigation.Size = new Size(177, 462);
+            panelNavigation.Size = new Size(50, 462);
             panelNavigation.TabIndex = 2;
             // 
             // labelProfileName
@@ -112,7 +128,7 @@
             labelProfileName.AutoSize = true;
             labelProfileName.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             labelProfileName.ForeColor = Color.LightSkyBlue;
-            labelProfileName.Location = new Point(90, 9);
+            labelProfileName.Location = new Point(51, 9);
             labelProfileName.Name = "labelProfileName";
             labelProfileName.Size = new Size(87, 21);
             labelProfileName.TabIndex = 6;
@@ -168,6 +184,7 @@
             // buttonChat
             // 
             buttonChat.BackColor = Color.SlateGray;
+            buttonChat.BackgroundImageLayout = ImageLayout.Stretch;
             buttonChat.Cursor = Cursors.Hand;
             buttonChat.FlatAppearance.BorderColor = Color.SlateGray;
             buttonChat.FlatAppearance.BorderSize = 0;
@@ -216,6 +233,7 @@
             // panelAccount
             // 
             panelAccount.BackColor = Color.Transparent;
+            panelAccount.Controls.Add(labelEditSuccess);
             panelAccount.Controls.Add(buttonChangePassword);
             panelAccount.Controls.Add(buttonEditAccount);
             panelAccount.Controls.Add(labelLastName);
@@ -225,10 +243,22 @@
             panelAccount.Controls.Add(label4);
             panelAccount.Controls.Add(label3);
             panelAccount.Controls.Add(label2);
-            panelAccount.Location = new Point(183, 33);
+            panelAccount.Location = new Point(184, 33);
             panelAccount.Name = "panelAccount";
-            panelAccount.Size = new Size(597, 416);
+            panelAccount.Size = new Size(597, 408);
             panelAccount.TabIndex = 4;
+            // 
+            // labelEditSuccess
+            // 
+            labelEditSuccess.AutoSize = true;
+            labelEditSuccess.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelEditSuccess.ForeColor = Color.Lime;
+            labelEditSuccess.Location = new Point(138, 324);
+            labelEditSuccess.Name = "labelEditSuccess";
+            labelEditSuccess.Size = new Size(114, 17);
+            labelEditSuccess.TabIndex = 10;
+            labelEditSuccess.Text = "Account Updated";
+            labelEditSuccess.UseWaitCursor = true;
             // 
             // buttonChangePassword
             // 
@@ -242,6 +272,7 @@
             buttonChangePassword.TabIndex = 8;
             buttonChangePassword.Text = "Change Password";
             buttonChangePassword.UseVisualStyleBackColor = false;
+            buttonChangePassword.Click += buttonChangePassword_Click;
             // 
             // buttonEditAccount
             // 
@@ -255,6 +286,7 @@
             buttonEditAccount.TabIndex = 7;
             buttonEditAccount.Text = "Edit Profile";
             buttonEditAccount.UseVisualStyleBackColor = false;
+            buttonEditAccount.Click += buttonEditAccount_Click;
             // 
             // labelLastName
             // 
@@ -343,10 +375,46 @@
             panelEditProfile.Controls.Add(label9);
             panelEditProfile.Controls.Add(label10);
             panelEditProfile.Controls.Add(label12);
-            panelEditProfile.Location = new Point(185, 35);
+            panelEditProfile.Location = new Point(185, 32);
             panelEditProfile.Name = "panelEditProfile";
-            panelEditProfile.Size = new Size(597, 404);
+            panelEditProfile.Size = new Size(597, 417);
             panelEditProfile.TabIndex = 9;
+            // 
+            // buttonCancelEdit
+            // 
+            buttonCancelEdit.BackColor = Color.SlateGray;
+            buttonCancelEdit.FlatStyle = FlatStyle.Popup;
+            buttonCancelEdit.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonCancelEdit.ForeColor = Color.LightSkyBlue;
+            buttonCancelEdit.Location = new Point(91, 237);
+            buttonCancelEdit.Name = "buttonCancelEdit";
+            buttonCancelEdit.Size = new Size(209, 31);
+            buttonCancelEdit.TabIndex = 11;
+            buttonCancelEdit.Text = "Cancel";
+            buttonCancelEdit.UseVisualStyleBackColor = false;
+            buttonCancelEdit.Click += buttonCancelEdit_Click;
+            // 
+            // textBoxLastNameUpdate
+            // 
+            textBoxLastNameUpdate.BackColor = Color.SlateGray;
+            textBoxLastNameUpdate.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxLastNameUpdate.ForeColor = Color.LightSkyBlue;
+            textBoxLastNameUpdate.Location = new Point(211, 131);
+            textBoxLastNameUpdate.Name = "textBoxLastNameUpdate";
+            textBoxLastNameUpdate.PlaceholderText = "Last Name";
+            textBoxLastNameUpdate.Size = new Size(152, 29);
+            textBoxLastNameUpdate.TabIndex = 10;
+            // 
+            // textBoxFirstNameUpdate
+            // 
+            textBoxFirstNameUpdate.BackColor = Color.SlateGray;
+            textBoxFirstNameUpdate.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxFirstNameUpdate.ForeColor = Color.LightSkyBlue;
+            textBoxFirstNameUpdate.Location = new Point(211, 88);
+            textBoxFirstNameUpdate.Name = "textBoxFirstNameUpdate";
+            textBoxFirstNameUpdate.PlaceholderText = "First Name";
+            textBoxFirstNameUpdate.Size = new Size(152, 29);
+            textBoxFirstNameUpdate.TabIndex = 8;
             // 
             // buttonSubmitEdit
             // 
@@ -360,6 +428,7 @@
             buttonSubmitEdit.TabIndex = 7;
             buttonSubmitEdit.Text = "Submit";
             buttonSubmitEdit.UseVisualStyleBackColor = false;
+            buttonSubmitEdit.Click += buttonSubmitEdit_Click;
             // 
             // label9
             // 
@@ -394,40 +463,151 @@
             label12.TabIndex = 0;
             label12.Text = "Edit Profile";
             // 
-            // textBoxFirstNameUpdate
+            // panelChangePassword
             // 
-            textBoxFirstNameUpdate.BackColor = Color.SlateGray;
-            textBoxFirstNameUpdate.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxFirstNameUpdate.ForeColor = Color.LightSkyBlue;
-            textBoxFirstNameUpdate.Location = new Point(211, 88);
-            textBoxFirstNameUpdate.Name = "textBoxFirstNameUpdate";
-            textBoxFirstNameUpdate.PlaceholderText = "First Name";
-            textBoxFirstNameUpdate.Size = new Size(152, 29);
-            textBoxFirstNameUpdate.TabIndex = 8;
+            panelChangePassword.BackColor = Color.Transparent;
+            panelChangePassword.Controls.Add(labelConfirmPass);
+            panelChangePassword.Controls.Add(labelNewPass);
+            panelChangePassword.Controls.Add(labelCurrentPass);
+            panelChangePassword.Controls.Add(buttonChangePassConfirm);
+            panelChangePassword.Controls.Add(textBoxConfirmPass);
+            panelChangePassword.Controls.Add(textBoxNewPass);
+            panelChangePassword.Controls.Add(textBoxCurrentPass);
+            panelChangePassword.Controls.Add(label11);
+            panelChangePassword.Controls.Add(label8);
+            panelChangePassword.Controls.Add(label7);
+            panelChangePassword.Controls.Add(label6);
+            panelChangePassword.Location = new Point(120, 33);
+            panelChangePassword.Name = "panelChangePassword";
+            panelChangePassword.Size = new Size(659, 393);
+            panelChangePassword.TabIndex = 10;
             // 
-            // textBoxLastNameUpdate
+            // buttonChangePassConfirm
             // 
-            textBoxLastNameUpdate.BackColor = Color.SlateGray;
-            textBoxLastNameUpdate.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxLastNameUpdate.ForeColor = Color.LightSkyBlue;
-            textBoxLastNameUpdate.Location = new Point(211, 131);
-            textBoxLastNameUpdate.Name = "textBoxLastNameUpdate";
-            textBoxLastNameUpdate.PlaceholderText = "Last Name";
-            textBoxLastNameUpdate.Size = new Size(152, 29);
-            textBoxLastNameUpdate.TabIndex = 10;
+            buttonChangePassConfirm.BackColor = Color.SlateGray;
+            buttonChangePassConfirm.FlatStyle = FlatStyle.Popup;
+            buttonChangePassConfirm.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonChangePassConfirm.ForeColor = Color.LightSkyBlue;
+            buttonChangePassConfirm.Location = new Point(170, 283);
+            buttonChangePassConfirm.Name = "buttonChangePassConfirm";
+            buttonChangePassConfirm.Size = new Size(177, 38);
+            buttonChangePassConfirm.TabIndex = 7;
+            buttonChangePassConfirm.Text = "Submit";
+            buttonChangePassConfirm.UseVisualStyleBackColor = false;
+            buttonChangePassConfirm.Click += buttonChangePassConfirm_Click;
             // 
-            // buttonCancelEdit
+            // textBoxConfirmPass
             // 
-            buttonCancelEdit.BackColor = Color.SlateGray;
-            buttonCancelEdit.FlatStyle = FlatStyle.Popup;
-            buttonCancelEdit.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonCancelEdit.ForeColor = Color.LightSkyBlue;
-            buttonCancelEdit.Location = new Point(91, 237);
-            buttonCancelEdit.Name = "buttonCancelEdit";
-            buttonCancelEdit.Size = new Size(209, 31);
-            buttonCancelEdit.TabIndex = 11;
-            buttonCancelEdit.Text = "Cancel";
-            buttonCancelEdit.UseVisualStyleBackColor = false;
+            textBoxConfirmPass.BackColor = Color.SlateGray;
+            textBoxConfirmPass.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxConfirmPass.ForeColor = Color.LightSkyBlue;
+            textBoxConfirmPass.Location = new Point(281, 209);
+            textBoxConfirmPass.Name = "textBoxConfirmPass";
+            textBoxConfirmPass.PlaceholderText = "Confirm Password";
+            textBoxConfirmPass.Size = new Size(175, 29);
+            textBoxConfirmPass.TabIndex = 6;
+            textBoxConfirmPass.LostFocus += textBoxConfirmPass_LostFocus;
+            // 
+            // textBoxNewPass
+            // 
+            textBoxNewPass.BackColor = Color.SlateGray;
+            textBoxNewPass.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxNewPass.ForeColor = Color.LightSkyBlue;
+            textBoxNewPass.Location = new Point(281, 160);
+            textBoxNewPass.Name = "textBoxNewPass";
+            textBoxNewPass.PlaceholderText = "New Password";
+            textBoxNewPass.Size = new Size(175, 29);
+            textBoxNewPass.TabIndex = 5;
+            textBoxNewPass.TextChanged += textBoxNewPass_TextChanged;
+            // 
+            // textBoxCurrentPass
+            // 
+            textBoxCurrentPass.BackColor = Color.SlateGray;
+            textBoxCurrentPass.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxCurrentPass.ForeColor = Color.LightSkyBlue;
+            textBoxCurrentPass.Location = new Point(281, 107);
+            textBoxCurrentPass.Name = "textBoxCurrentPass";
+            textBoxCurrentPass.PlaceholderText = "Current Password";
+            textBoxCurrentPass.Size = new Size(175, 29);
+            textBoxCurrentPass.TabIndex = 4;
+            textBoxCurrentPass.TextChanged += textBoxCurrentPass_TextChanged;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            label11.ForeColor = Color.LightSkyBlue;
+            label11.Location = new Point(17, 206);
+            label11.Name = "label11";
+            label11.Size = new Size(229, 32);
+            label11.TabIndex = 3;
+            label11.Text = "Confirm Password:";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            label8.ForeColor = Color.LightSkyBlue;
+            label8.Location = new Point(25, 104);
+            label8.Name = "label8";
+            label8.Size = new Size(223, 32);
+            label8.TabIndex = 2;
+            label8.Text = "Current Password:";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.ForeColor = Color.LightSkyBlue;
+            label7.Location = new Point(59, 155);
+            label7.Name = "label7";
+            label7.Size = new Size(187, 32);
+            label7.TabIndex = 1;
+            label7.Text = "New Password:";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.ForeColor = Color.LightSkyBlue;
+            label6.Location = new Point(165, 25);
+            label6.Name = "label6";
+            label6.Size = new Size(214, 32);
+            label6.TabIndex = 0;
+            label6.Text = "Change Password";
+            // 
+            // labelCurrentPass
+            // 
+            labelCurrentPass.AutoSize = true;
+            labelCurrentPass.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            labelCurrentPass.ForeColor = Color.Red;
+            labelCurrentPass.Location = new Point(281, 141);
+            labelCurrentPass.Name = "labelCurrentPass";
+            labelCurrentPass.Size = new Size(58, 15);
+            labelCurrentPass.TabIndex = 8;
+            labelCurrentPass.Text = "Required";
+            // 
+            // labelNewPass
+            // 
+            labelNewPass.AutoSize = true;
+            labelNewPass.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            labelNewPass.ForeColor = Color.Red;
+            labelNewPass.Location = new Point(281, 192);
+            labelNewPass.Name = "labelNewPass";
+            labelNewPass.Size = new Size(58, 15);
+            labelNewPass.TabIndex = 9;
+            labelNewPass.Text = "Required";
+            // 
+            // labelConfirmPass
+            // 
+            labelConfirmPass.AutoSize = true;
+            labelConfirmPass.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            labelConfirmPass.ForeColor = Color.Red;
+            labelConfirmPass.Location = new Point(281, 241);
+            labelConfirmPass.Name = "labelConfirmPass";
+            labelConfirmPass.Size = new Size(133, 15);
+            labelConfirmPass.TabIndex = 10;
+            labelConfirmPass.Text = "Passwords must match";
             // 
             // Profile
             // 
@@ -437,8 +617,9 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(784, 461);
-            Controls.Add(panelEditProfile);
+            Controls.Add(panelChangePassword);
             Controls.Add(panelAccount);
+            Controls.Add(panelEditProfile);
             Controls.Add(panelHome);
             Controls.Add(panelNavigation);
             DoubleBuffered = true;
@@ -457,6 +638,8 @@
             panelAccount.PerformLayout();
             panelEditProfile.ResumeLayout(false);
             panelEditProfile.PerformLayout();
+            panelChangePassword.ResumeLayout(false);
+            panelChangePassword.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -491,5 +674,18 @@
         private TextBox textBoxLastNameUpdate;
         private TextBox textBoxFirstNameUpdate;
         private Button buttonCancelEdit;
+        private Label labelEditSuccess;
+        private Panel panelChangePassword;
+        private Label label8;
+        private Label label7;
+        private Label label6;
+        private Button buttonChangePassConfirm;
+        private TextBox textBoxConfirmPass;
+        private TextBox textBoxNewPass;
+        private TextBox textBoxCurrentPass;
+        private Label label11;
+        private Label labelConfirmPass;
+        private Label labelNewPass;
+        private Label labelCurrentPass;
     }
 }

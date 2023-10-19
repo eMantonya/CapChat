@@ -78,6 +78,85 @@ namespace UserLibrary
                 this.Stored = false;
             }
         }
+
+        public bool UpdateUserName(string firstName, string lastName)
+        {
+            var config = new ConfigurationBuilder().AddUserSecrets<User>().Build();
+            string connString = config["connString"];
+            try
+            {
+                using (var connection = new SqlConnection(connString))
+                {
+                    connection.Open();
+
+                    string sql = @"UPDATE [User] 
+                        SET UserFirstName = @first, UserLastName = @last 
+                        WHERE UserEmail = @email";
+
+
+                    using (var command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@first", firstName);
+                        command.Parameters.AddWithValue("@last", lastName);
+                        command.Parameters.AddWithValue("@email", this.Email);
+
+                        int rowsAffected = command.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            this.FirstName = firstName;
+                            this.LastName = lastName;
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return false;
+        }
+
+        public bool VerifyPassword(string password)
+        {
+            var input = Convert.ToHexString(_cHelper.ComputeHash(password, this._salt));
+            var oldPass = Convert.ToHexString(this._passwordHash);
+            //byte[] inputPassHash = _cHelper.ComputeHash(password, this._salt);
+            if (string.Equals(input, oldPass))
+            {
+                return true;
+                
+            }
+            return false;
+        }
+        public bool UpdateUserPassword(string pass)
+        {
+            byte[] newPassHash = _cHelper.ComputeHash(pass, this._salt);
+            this._passwordHash = newPassHash;
+
+            var config = new ConfigurationBuilder().AddUserSecrets<User>().Build();
+            string connString = config["connString"];
+            using (var connection = new SqlConnection(connString))
+            {
+                connection.Open();
+
+                string sql = @"UPDATE [User] SET UserPassHash = @hash WHERE UserEmail = @email";
+
+                using (var command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("hash", newPassHash);
+                    command.Parameters.AddWithValue("@email", this.Email);
+                    
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+
+        }
     }
 
     

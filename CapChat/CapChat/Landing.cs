@@ -26,6 +26,8 @@ namespace CapChat
             panelLogin.Visible = true;
             labelLoginEmail.Visible = false;
             labelLoginPass.Visible = false;
+            textBoxLoginEmail.Text = "";
+            textBoxLoginPass.Text = "";
             panelLogin.BringToFront();
             buttonLoginScreen.BackColor = Color.DeepSkyBlue;
             buttonRegisterScreen.BackColor = Color.SlateGray;
@@ -72,7 +74,7 @@ namespace CapChat
                 errorEmail.Visible = true;
             }
             else { errorEmail.Visible = false; }
-            
+
 
         }
         private void textBoxRegisterPass_LostFocus(object sender, EventArgs e)
@@ -158,7 +160,7 @@ namespace CapChat
             {
                 MessageBox.Show("Login failed.. Please try again", "Internal Server Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            //if there is problem connection to DB, show messagebox to indicate server error
+            
         }
 
         private void textBoxLoginEmail_LostFocus(object sender, EventArgs e)
