@@ -167,7 +167,7 @@ namespace CapChat
                 MessageBox.Show("Check password and try again", "Invalid Password", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (!_currentUser.UpdateUserPassword(oldPass))
+            if (!_currentUser.UpdateUserPassword(newPass))
             {
                 MessageBox.Show("Failed to update Password", "Internal Server Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
