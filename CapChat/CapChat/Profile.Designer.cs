@@ -35,11 +35,8 @@
             labelProfileName = new Label();
             panelNavButtons = new Panel();
             buttonAccount = new Button();
-            buttonHome = new Button();
             buttonChat = new Button();
             navToggle = new PictureBox();
-            panelHome = new Panel();
-            label1 = new Label();
             panelAccount = new Panel();
             labelEditSuccess = new Label();
             buttonChangePassword = new Button();
@@ -60,6 +57,10 @@
             label10 = new Label();
             label12 = new Label();
             panelChangePassword = new Panel();
+            buttonCancelPassChange = new Button();
+            labelConfirmPass = new Label();
+            labelNewPass = new Label();
+            labelCurrentPass = new Label();
             buttonChangePassConfirm = new Button();
             textBoxConfirmPass = new TextBox();
             textBoxNewPass = new TextBox();
@@ -68,13 +69,9 @@
             label8 = new Label();
             label7 = new Label();
             label6 = new Label();
-            labelCurrentPass = new Label();
-            labelNewPass = new Label();
-            labelConfirmPass = new Label();
             panelNavigation.SuspendLayout();
             panelNavButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)navToggle).BeginInit();
-            panelHome.SuspendLayout();
             panelAccount.SuspendLayout();
             panelEditProfile.SuspendLayout();
             panelChangePassword.SuspendLayout();
@@ -137,7 +134,6 @@
             // panelNavButtons
             // 
             panelNavButtons.Controls.Add(buttonAccount);
-            panelNavButtons.Controls.Add(buttonHome);
             panelNavButtons.Controls.Add(buttonLogout);
             panelNavButtons.Controls.Add(buttonChat);
             panelNavButtons.Location = new Point(0, 200);
@@ -162,24 +158,6 @@
             buttonAccount.Text = "Account";
             buttonAccount.UseVisualStyleBackColor = false;
             buttonAccount.Click += buttonAccount_Click;
-            // 
-            // buttonHome
-            // 
-            buttonHome.BackColor = Color.SlateGray;
-            buttonHome.BackgroundImageLayout = ImageLayout.Stretch;
-            buttonHome.Cursor = Cursors.Hand;
-            buttonHome.FlatAppearance.BorderColor = Color.SlateGray;
-            buttonHome.FlatAppearance.BorderSize = 0;
-            buttonHome.FlatStyle = FlatStyle.Flat;
-            buttonHome.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonHome.ForeColor = Color.LightSkyBlue;
-            buttonHome.Location = new Point(0, 8);
-            buttonHome.Name = "buttonHome";
-            buttonHome.Size = new Size(173, 41);
-            buttonHome.TabIndex = 1;
-            buttonHome.Text = "Home";
-            buttonHome.UseVisualStyleBackColor = false;
-            buttonHome.Click += buttonHome_Click;
             // 
             // buttonChat
             // 
@@ -209,26 +187,6 @@
             navToggle.TabIndex = 0;
             navToggle.TabStop = false;
             navToggle.Click += navToggle_Click;
-            // 
-            // panelHome
-            // 
-            panelHome.BackColor = Color.Transparent;
-            panelHome.Controls.Add(label1);
-            panelHome.Location = new Point(183, 33);
-            panelHome.Name = "panelHome";
-            panelHome.Size = new Size(597, 426);
-            panelHome.TabIndex = 3;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.LightSkyBlue;
-            label1.Location = new Point(286, 25);
-            label1.Name = "label1";
-            label1.Size = new Size(82, 32);
-            label1.TabIndex = 0;
-            label1.Text = "Home";
             // 
             // panelAccount
             // 
@@ -466,6 +424,7 @@
             // panelChangePassword
             // 
             panelChangePassword.BackColor = Color.Transparent;
+            panelChangePassword.Controls.Add(buttonCancelPassChange);
             panelChangePassword.Controls.Add(labelConfirmPass);
             panelChangePassword.Controls.Add(labelNewPass);
             panelChangePassword.Controls.Add(labelCurrentPass);
@@ -481,6 +440,53 @@
             panelChangePassword.Name = "panelChangePassword";
             panelChangePassword.Size = new Size(659, 393);
             panelChangePassword.TabIndex = 10;
+            // 
+            // buttonCancelPassChange
+            // 
+            buttonCancelPassChange.BackColor = Color.SlateGray;
+            buttonCancelPassChange.FlatStyle = FlatStyle.Popup;
+            buttonCancelPassChange.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonCancelPassChange.ForeColor = Color.LightSkyBlue;
+            buttonCancelPassChange.Location = new Point(170, 327);
+            buttonCancelPassChange.Name = "buttonCancelPassChange";
+            buttonCancelPassChange.Size = new Size(177, 38);
+            buttonCancelPassChange.TabIndex = 11;
+            buttonCancelPassChange.Text = "Cancel";
+            buttonCancelPassChange.UseVisualStyleBackColor = false;
+            buttonCancelPassChange.Click += buttonCancelPassChange_Click;
+            // 
+            // labelConfirmPass
+            // 
+            labelConfirmPass.AutoSize = true;
+            labelConfirmPass.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            labelConfirmPass.ForeColor = Color.Red;
+            labelConfirmPass.Location = new Point(281, 241);
+            labelConfirmPass.Name = "labelConfirmPass";
+            labelConfirmPass.Size = new Size(133, 15);
+            labelConfirmPass.TabIndex = 10;
+            labelConfirmPass.Text = "Passwords must match";
+            // 
+            // labelNewPass
+            // 
+            labelNewPass.AutoSize = true;
+            labelNewPass.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            labelNewPass.ForeColor = Color.Red;
+            labelNewPass.Location = new Point(281, 192);
+            labelNewPass.Name = "labelNewPass";
+            labelNewPass.Size = new Size(58, 15);
+            labelNewPass.TabIndex = 9;
+            labelNewPass.Text = "Required";
+            // 
+            // labelCurrentPass
+            // 
+            labelCurrentPass.AutoSize = true;
+            labelCurrentPass.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            labelCurrentPass.ForeColor = Color.Red;
+            labelCurrentPass.Location = new Point(281, 141);
+            labelCurrentPass.Name = "labelCurrentPass";
+            labelCurrentPass.Size = new Size(58, 15);
+            labelCurrentPass.TabIndex = 8;
+            labelCurrentPass.Text = "Required";
             // 
             // buttonChangePassConfirm
             // 
@@ -518,7 +524,7 @@
             textBoxNewPass.PlaceholderText = "New Password";
             textBoxNewPass.Size = new Size(175, 29);
             textBoxNewPass.TabIndex = 5;
-            textBoxNewPass.TextChanged += textBoxNewPass_TextChanged;
+            textBoxNewPass.LostFocus += textBoxNewPass_LostFocus;
             // 
             // textBoxCurrentPass
             // 
@@ -530,7 +536,7 @@
             textBoxCurrentPass.PlaceholderText = "Current Password";
             textBoxCurrentPass.Size = new Size(175, 29);
             textBoxCurrentPass.TabIndex = 4;
-            textBoxCurrentPass.TextChanged += textBoxCurrentPass_TextChanged;
+            textBoxCurrentPass.LostFocus += textBoxCurrentPass_LostFocus;
             // 
             // label11
             // 
@@ -576,39 +582,6 @@
             label6.TabIndex = 0;
             label6.Text = "Change Password";
             // 
-            // labelCurrentPass
-            // 
-            labelCurrentPass.AutoSize = true;
-            labelCurrentPass.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelCurrentPass.ForeColor = Color.Red;
-            labelCurrentPass.Location = new Point(281, 141);
-            labelCurrentPass.Name = "labelCurrentPass";
-            labelCurrentPass.Size = new Size(58, 15);
-            labelCurrentPass.TabIndex = 8;
-            labelCurrentPass.Text = "Required";
-            // 
-            // labelNewPass
-            // 
-            labelNewPass.AutoSize = true;
-            labelNewPass.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelNewPass.ForeColor = Color.Red;
-            labelNewPass.Location = new Point(281, 192);
-            labelNewPass.Name = "labelNewPass";
-            labelNewPass.Size = new Size(58, 15);
-            labelNewPass.TabIndex = 9;
-            labelNewPass.Text = "Required";
-            // 
-            // labelConfirmPass
-            // 
-            labelConfirmPass.AutoSize = true;
-            labelConfirmPass.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelConfirmPass.ForeColor = Color.Red;
-            labelConfirmPass.Location = new Point(281, 241);
-            labelConfirmPass.Name = "labelConfirmPass";
-            labelConfirmPass.Size = new Size(133, 15);
-            labelConfirmPass.TabIndex = 10;
-            labelConfirmPass.Text = "Passwords must match";
-            // 
             // Profile
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -620,7 +593,6 @@
             Controls.Add(panelChangePassword);
             Controls.Add(panelAccount);
             Controls.Add(panelEditProfile);
-            Controls.Add(panelHome);
             Controls.Add(panelNavigation);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -632,8 +604,6 @@
             panelNavigation.PerformLayout();
             panelNavButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)navToggle).EndInit();
-            panelHome.ResumeLayout(false);
-            panelHome.PerformLayout();
             panelAccount.ResumeLayout(false);
             panelAccount.PerformLayout();
             panelEditProfile.ResumeLayout(false);
@@ -650,11 +620,8 @@
         private Panel panelNavigation;
         private PictureBox navToggle;
         private Button buttonChat;
-        private Button buttonHome;
         private Panel panelNavButtons;
         private Label labelProfileName;
-        private Panel panelHome;
-        private Label label1;
         private Button buttonAccount;
         private Panel panelAccount;
         private Label label5;
@@ -687,5 +654,6 @@
         private Label labelConfirmPass;
         private Label labelNewPass;
         private Label labelCurrentPass;
+        private Button buttonCancelPassChange;
     }
 }

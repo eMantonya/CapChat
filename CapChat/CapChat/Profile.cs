@@ -37,13 +37,21 @@ namespace CapChat
 
             panelNavigation.Size = MinimumSize;
             panelNavigation.BackColor = Color.Transparent;
-            buttonHome.BackColor = Color.Transparent;
+            
             buttonAccount.BackColor = Color.Transparent;
             buttonChat.BackColor = Color.Transparent;
             buttonLogout.BackColor = Color.Transparent;
             labelEditSuccess.Visible = false;
-            panelHome.Visible = false;
-            buttonAccount_Click(sender, e);
+            panelChangePassword.Visible = false;
+            
+
+            panelAccount.Visible = true;
+            panelChangePassword.Visible = false;
+            panelAccount.BringToFront();
+            labelEditSuccess.Visible = false;
+            labelFirstName.Text = _currentUser.FirstName;
+            labelLastName.Text = _currentUser.LastName;
+            labelEmail.Text = _currentUser.Email;
 
         }
 
@@ -59,7 +67,6 @@ namespace CapChat
                 panelNavigation.Size = panelNavigation.MinimumSize;
                 panelNavigation.BackColor = Color.Transparent;
                 panelNavButtons.BackColor = Color.Transparent;
-                buttonHome.BackColor = Color.Transparent;
                 buttonChat.BackColor = Color.Transparent;
                 buttonAccount.BackColor = Color.Transparent;
                 buttonLogout.BackColor = Color.Transparent;
@@ -70,7 +77,6 @@ namespace CapChat
                 panelNavigation.Size = panelNavigation.MaximumSize;
                 panelNavigation.BackColor = Color.SlateGray;
                 panelNavButtons.BackColor = Color.SlateGray;
-                buttonHome.BackColor = Color.SlateGray;
                 buttonChat.BackColor = Color.SlateGray;
                 buttonAccount.BackColor = Color.SlateGray;
                 buttonLogout.BackColor = Color.SlateGray;
@@ -79,24 +85,18 @@ namespace CapChat
             }
         }
 
-        private void buttonHome_Click(object sender, EventArgs e)
-        {
-            panelHome.Visible = true;
-            panelAccount.Visible = false;
-            panelHome.BringToFront();
-            //panelChat.Visible = false;
-            //panelSettings.Visible = false;
-            //panelHelp.Visible = false;
-        }
+        
 
         private void buttonAccount_Click(object sender, EventArgs e)
         {
             panelAccount.Visible = true;
+            panelChangePassword.Visible = false;
             panelAccount.BringToFront();
             labelEditSuccess.Visible = false;
             labelFirstName.Text = _currentUser.FirstName;
             labelLastName.Text = _currentUser.LastName;
             labelEmail.Text = _currentUser.Email;
+            navToggle_Click(this, e);
         }
 
         private void buttonSubmitEdit_Click(object sender, EventArgs e)
@@ -180,19 +180,24 @@ namespace CapChat
             labelEditSuccess.Visible = true;
         }
 
-        private void textBoxCurrentPass_TextChanged(object sender, EventArgs e)
+        private void textBoxCurrentPass_LostFocus(object sender, EventArgs e)
         {
             labelCurrentPass.Visible = (textBoxCurrentPass.Text.Length == 0);
         }
 
-        private void textBoxNewPass_TextChanged(object sender, EventArgs e)
+        private void textBoxNewPass_LostFocus(object sender, EventArgs e)
         {
             labelNewPass.Visible = (textBoxNewPass.Text.Length == 0);
         }
 
         private void textBoxConfirmPass_LostFocus(object sender, EventArgs e)
         {
-            labelConfirmPass.Visible = (textBoxConfirmPass.Text == textBoxNewPass.Text);
+            labelConfirmPass.Visible = (textBoxConfirmPass.Text != textBoxNewPass.Text);
+        }
+
+        private void buttonCancelPassChange_Click(object sender, EventArgs e)
+        {
+            buttonAccount_Click(sender, e);
         }
     }
 }
