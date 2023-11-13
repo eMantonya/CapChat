@@ -1,7 +1,10 @@
 ﻿using CapChat;
+using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -19,7 +22,29 @@ namespace CapChat
         {
             InitializeComponent();
             _currentUser = currentUser;
+
+            var builder = new ConfigurationBuilder()
+            .AddUserSecrets<Profile>();
+
+            IConfiguration configuration = builder.Build();
+
+            string signalRConnection = configuration["SignalRConnection"];
+
+            conn = new HubConnectionBuilder()
+                .WithUrl(signalRConnection)
+                .Build();
+
+            conn.Closed += HubConnection_Closed;
+
         }
+
+        private async Task HubConnection_Closed(Exception? arg)
+        {
+            await Task.Delay(new Random().Next(0, 5) * 1000);
+            await conn.StartAsync();
+        }
+
+        HubConnection conn;
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
@@ -53,7 +78,15 @@ namespace CapChat
             labelLastName.Text = _currentUser.LastName;
             labelEmail.Text = _currentUser.Email;
 
+            conn.On<string, string>("ReceiveMessage", (user, message) =>
+            {
+                var newMessage = $"{user}: {message}";
+
+            });
+
         }
+
+ 
 
         private void navToggle_Click(object sender, EventArgs e)
         {
@@ -199,5 +232,6 @@ namespace CapChat
         {
             buttonAccount_Click(sender, e);
         }
+
     }
 }
