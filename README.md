@@ -2,23 +2,23 @@
 
 ## Features to Develop
 
-[x] **Registration Window**: Implement a user registration window with relevant fields.
+[x] 1. **Registration Window**: Implement a user registration window with relevant fields.
 
-[x] **User-Storage**: Develop a mechanism to store user information securely.
+[x] 2. **User-Storage**: Develop a mechanism to store user information securely.
 
-[x] **Password Encryption**: Enhance security by encrypting user passwords before storage.
+[x] 3. **Password Encryption**: Enhance security by encrypting user passwords before storage.
 
-[x] **Sign-in Window**: Create a user login window with authentication functionality.
+[x] 4. **Sign-in Window**: Create a user login window with authentication functionality.
 
-[x] **User-Account Edit**: Allow users to modify their account information.
+[x] 5. **User-Account Edit**: Allow users to modify their account information.
 
-[x] **Password Change**: Provide an option for users to change their passwords.
+[x] 6. **Password Change**: Provide an option for users to change their passwords.
 
-[x] **Profile Window**: Design a user profile window to display and edit user details.
+[x] 7. **Profile Window**: Design a user profile window to display and edit user details.
 
-[] **Chat Window**: Develop a chat interface for users to communicate.
+[] 8. **Chat Window**: Develop a chat interface for users to communicate.
 
-[] **SignalR Real-Time Communication**: Implement SignalR for real-time communication features.
+[] 9. **SignalR Real-Time Communication**: Implement SignalR for real-time communication features.
 
 ## Updates/Improvements for the Future
 
