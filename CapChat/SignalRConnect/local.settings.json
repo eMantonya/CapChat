@@ -1,0 +1,8 @@
+{
+    "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "SignalRConnectionString": "Endpoint=https://capchat.service.signalr.net;AccessKey=fUSoqJthCg3wkPb57SrsKQ2bUHo1J+qIg4r2DiOXJwE=;Version=1.0;"
+  }
+}

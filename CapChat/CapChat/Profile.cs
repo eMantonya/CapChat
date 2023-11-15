@@ -1,6 +1,7 @@
 ﻿using CapChat;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,43 +9,35 @@ using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UserLibrary;
+using static System.Net.WebRequestMethods;
 
 namespace CapChat
 {
     public partial class Profile : Form
     {
         private User _currentUser;
+        private HubConnection _hubConnection;
         public Profile(User currentUser)
         {
             InitializeComponent();
+            
             _currentUser = currentUser;
 
-            var builder = new ConfigurationBuilder()
-            .AddUserSecrets<Profile>();
+            //var builder = new ConfigurationBuilder()
+            //    .AddUserSecrets<Profile>();
 
-            IConfiguration configuration = builder.Build();
+            //IConfiguration configuration = builder.Build();
 
-            string signalRConnection = configuration["SignalRConnection"];
+            //string signalRConnection = configuration["SignalRConnection"];
+            //string signalRToken = configuration["SignalRToken"];
 
-            conn = new HubConnectionBuilder()
-                .WithUrl(signalRConnection)
-                .Build();
-
-            conn.Closed += HubConnection_Closed;
-
+            //conn.Closed += HubConnection_Closed;
         }
-
-        private async Task HubConnection_Closed(Exception? arg)
-        {
-            await Task.Delay(new Random().Next(0, 5) * 1000);
-            await conn.StartAsync();
-        }
-
-        HubConnection conn;
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
@@ -68,6 +61,7 @@ namespace CapChat
             buttonLogout.BackColor = Color.Transparent;
             labelEditSuccess.Visible = false;
             panelChangePassword.Visible = false;
+            panelChat.Visible = false;
 
 
             panelAccount.Visible = true;
@@ -77,16 +71,35 @@ namespace CapChat
             labelFirstName.Text = _currentUser.FirstName;
             labelLastName.Text = _currentUser.LastName;
             labelEmail.Text = _currentUser.Email;
+            
 
-            conn.On<string, string>("ReceiveMessage", (user, message) =>
-            {
-                var newMessage = $"{user}: {message}";
+            //conn.On<string, string>("ReceiveMessage", (user, message) =>
+            //{
+            //    var newMessage = $"{user}: {message}";
 
-            });
-
+            //});
+            //try
+            //{
+            //    await conn.StartAsync();
+            //    chatBox.Items.Add("Connected");
+            //}
+            //catch (Exception ex)
+            //{
+            //    chatBox.Items.Add(ex.Message);
+            //}
         }
-
- 
+        private void buttonSend_Click(object sender, EventArgs e)
+        {
+            //try
+            //{
+            //    await conn.InvokeAsync("Send Message", _currentUser, textBoxSend.Text);
+            //}
+            //catch (Exception ex)
+            //{
+            //    chatBox.Items.Add(ex.Message);
+            //}
+            //finally { textBoxSend.Text = ""; }
+        }
 
         private void navToggle_Click(object sender, EventArgs e)
         {
@@ -118,18 +131,17 @@ namespace CapChat
             }
         }
 
-
-
         private void buttonAccount_Click(object sender, EventArgs e)
         {
             panelAccount.Visible = true;
             panelChangePassword.Visible = false;
+            panelChat.Visible = false;
             panelAccount.BringToFront();
             labelEditSuccess.Visible = false;
             labelFirstName.Text = _currentUser.FirstName;
             labelLastName.Text = _currentUser.LastName;
             labelEmail.Text = _currentUser.Email;
-            //navToggle_Click(this, e);
+            navToggle_Click(this, e);
         }
 
         private void buttonSubmitEdit_Click(object sender, EventArgs e)
@@ -233,5 +245,15 @@ namespace CapChat
             buttonAccount_Click(sender, e);
         }
 
+        private void buttonChat_Click(object sender, EventArgs e)
+        {
+            panelAccount.Visible = false;
+            panelChangePassword.Visible = false;
+            panelEditProfile.Visible = false;
+
+            panelChat.Visible = true;
+            panelChat.BringToFront();
+            navToggle_Click(sender, e);
+        }
     }
 }
