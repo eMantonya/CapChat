@@ -28,15 +28,26 @@ namespace CapChat
             
             _currentUser = currentUser;
 
-            //var builder = new ConfigurationBuilder()
-            //    .AddUserSecrets<Profile>();
+            var builder = new ConfigurationBuilder()
+                .AddUserSecrets<Profile>();
 
-            //IConfiguration configuration = builder.Build();
+            IConfiguration configuration = builder.Build();
 
-            //string signalRConnection = configuration["SignalRConnection"];
-            //string signalRToken = configuration["SignalRToken"];
+            string signalRConnection = configuration["SignalRConnection"];
+            string signalRToken = configuration["SignalRToken"];
 
-            //conn.Closed += HubConnection_Closed;
+            _hubConnection = new HubConnectionBuilder()
+                .WithUrl("https://capchat.service.signalr.net/", options =>
+                {
+                    options.AccessTokenProvider = () => Task.FromResult(signalRToken);
+                })
+                .Build();
+
+            _hubConnection.Closed += async (error) =>
+            {
+                await Task.Delay(new Random().Next(0, 5) * 1000);
+                await _hubConnection.StartAsync();
+            };
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
@@ -46,7 +57,7 @@ namespace CapChat
             landing.Show();
         }
 
-        private void Profile_Load(object sender, EventArgs e)
+        private async void Profile_Load(object sender, EventArgs e)
         {
             Landing landing = new Landing();
 
@@ -71,34 +82,34 @@ namespace CapChat
             labelFirstName.Text = _currentUser.FirstName;
             labelLastName.Text = _currentUser.LastName;
             labelEmail.Text = _currentUser.Email;
-            
 
-            //conn.On<string, string>("ReceiveMessage", (user, message) =>
-            //{
-            //    var newMessage = $"{user}: {message}";
 
-            //});
-            //try
-            //{
-            //    await conn.StartAsync();
-            //    chatBox.Items.Add("Connected");
-            //}
-            //catch (Exception ex)
-            //{
-            //    chatBox.Items.Add(ex.Message);
-            //}
+            _hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
+            {
+                var newMessage = $"{user}: {message}";
+
+            });
+            try
+            {
+                await _hubConnection.StartAsync();
+                chatBox.Items.Add("Connected");
+            }
+            catch (Exception ex)
+            {
+                chatBox.Items.Add(ex.Message);
+            }
         }
-        private void buttonSend_Click(object sender, EventArgs e)
+        private async void buttonSend_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    await conn.InvokeAsync("Send Message", _currentUser, textBoxSend.Text);
-            //}
-            //catch (Exception ex)
-            //{
-            //    chatBox.Items.Add(ex.Message);
-            //}
-            //finally { textBoxSend.Text = ""; }
+            try
+            {
+                await _hubConnection.InvokeAsync("Send Message", _currentUser, textBoxSend.Text);
+            }
+            catch (Exception ex)
+            {
+                chatBox.Items.Add(ex.Message);
+            }
+            finally { textBoxSend.Text = ""; }
         }
 
         private void navToggle_Click(object sender, EventArgs e)
