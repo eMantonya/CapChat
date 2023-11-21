@@ -1,4 +1,5 @@
 ﻿using CapChat;
+using ClientGUI;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,37 +22,41 @@ namespace CapChat
     public partial class Profile : Form
     {
         private User _currentUser;
-        private HubConnection _hubConnection;
+        //private HubConnection _hubConnection;
+        public AzureSignalRClient client;
         public Profile(User currentUser)
         {
             InitializeComponent();
+
+            client = new AzureSignalRClient(this);
             
             _currentUser = currentUser;
 
-            var builder = new ConfigurationBuilder()
-                .AddUserSecrets<Profile>();
+            //var builder = new ConfigurationBuilder()
+            //    .AddUserSecrets<Profile>();
 
-            IConfiguration configuration = builder.Build();
+            //IConfiguration configuration = builder.Build();
 
-            string signalRConnection = configuration["SignalRConnection"];
-            string signalRToken = configuration["SignalRToken"];
+            //string signalRConnection = configuration["SignalRConnection"];
+            //string signalRToken = configuration["SignalRToken"];
 
-            _hubConnection = new HubConnectionBuilder()
-                .WithUrl("https://capchat.service.signalr.net/", options =>
-                {
-                    options.AccessTokenProvider = () => Task.FromResult(signalRToken);
-                })
-                .Build();
+            //_hubConnection = new HubConnectionBuilder()
+            //    .WithUrl("https://capchat.service.signalr.net/", options =>
+            //    {
+            //        options.AccessTokenProvider = () => Task.FromResult(signalRToken);
+            //    })
+            //    .Build();
 
-            _hubConnection.Closed += async (error) =>
-            {
-                await Task.Delay(new Random().Next(0, 5) * 1000);
-                await _hubConnection.StartAsync();
-            };
+            //_hubConnection.Closed += async (error) =>
+            //{
+            //    await Task.Delay(new Random().Next(0, 5) * 1000);
+            //    await _hubConnection.StartAsync();
+            //};
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
+            client.Close();
             Landing landing = new Landing();
             this.Hide();
             landing.Show();
@@ -83,33 +88,49 @@ namespace CapChat
             labelLastName.Text = _currentUser.LastName;
             labelEmail.Text = _currentUser.Email;
 
+            //setup Azure SignalR
+            client.Initialize();
+            
 
-            _hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
-            {
-                var newMessage = $"{user}: {message}";
 
-            });
-            try
-            {
-                await _hubConnection.StartAsync();
-                chatBox.Items.Add("Connected");
-            }
-            catch (Exception ex)
-            {
-                chatBox.Items.Add(ex.Message);
-            }
+            //_hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
+            //{
+            //    var newMessage = $"{user}: {message}";
+
+            //});
+            //try
+            //{
+            //    await _hubConnection.StartAsync();
+            //    chatBox.Items.Add("Connected");
+            //}
+            //catch (Exception ex)
+            //{
+            //    chatBox.Items.Add(ex.Message);
+            //}
         }
-        private async void buttonSend_Click(object sender, EventArgs e)
+        private void buttonSend_Click(object sender, EventArgs e)
         {
             try
             {
-                await _hubConnection.InvokeAsync("Send Message", _currentUser, textBoxSend.Text);
+                var messege = textBoxSend.Text;
+                if (!string.IsNullOrEmpty(messege))
+                {
+                    client.SendData(_currentUser, messege);
+                }
             }
             catch (Exception ex)
             {
-                chatBox.Items.Add(ex.Message);
+                chatBox.Items.Add(ex);
             }
-            finally { textBoxSend.Text = ""; }
+            //try
+            //{
+            //    await _hubConnection.InvokeAsync("Send Message", _currentUser, textBoxSend.Text);
+            //}
+            //catch (Exception ex)
+            //{
+            //    chatBox.Items.Add(ex.Message);
+            //}
+            //finally { textBoxSend.Text = ""; }
         }
 
         private void navToggle_Click(object sender, EventArgs e)
