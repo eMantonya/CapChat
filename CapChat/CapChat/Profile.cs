@@ -1,62 +1,40 @@
-﻿using CapChat;
-using ClientGUI;
-using Microsoft.AspNetCore.SignalR.Client;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using Newtonsoft.Json;
 using UserLibrary;
-using static System.Net.WebRequestMethods;
 
 namespace CapChat
 {
     public partial class Profile : Form
     {
         private User _currentUser;
-        //private HubConnection _hubConnection;
-        public AzureSignalRClient client;
+        private HubConnection _hubConnection;
+        
         public Profile(User currentUser)
         {
             InitializeComponent();
-
-            client = new AzureSignalRClient(this);
             
             _currentUser = currentUser;
 
-            //var builder = new ConfigurationBuilder()
-            //    .AddUserSecrets<Profile>();
+            _hubConnection = new HubConnectionBuilder().WithUrl("http://localhost:7278/api/").Build();//change this url to the url of negotiate function once deployed/store in key vault
+            try
+            {
+                _hubConnection.StartAsync();
+                chatBox.Items.Add("Connected!");
+            }
+            catch (Exception ex)
+            {
+                chatBox.Items.Add($"{ex.Message}");
+            }
 
-            //IConfiguration configuration = builder.Build();
-
-            //string signalRConnection = configuration["SignalRConnection"];
-            //string signalRToken = configuration["SignalRToken"];
-
-            //_hubConnection = new HubConnectionBuilder()
-            //    .WithUrl("https://capchat.service.signalr.net/", options =>
-            //    {
-            //        options.AccessTokenProvider = () => Task.FromResult(signalRToken);
-            //    })
-            //    .Build();
-
-            //_hubConnection.Closed += async (error) =>
-            //{
-            //    await Task.Delay(new Random().Next(0, 5) * 1000);
-            //    await _hubConnection.StartAsync();
-            //};
+            _hubConnection.On<string>("newMessage", (message) =>
+            {
+                UpdateChatBox(message);
+            });
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
-            client.Close();
+            _hubConnection.StopAsync();
             Landing landing = new Landing();
             this.Hide();
             landing.Show();
@@ -87,50 +65,39 @@ namespace CapChat
             labelFirstName.Text = _currentUser.FirstName;
             labelLastName.Text = _currentUser.LastName;
             labelEmail.Text = _currentUser.Email;
-
-            //setup Azure SignalR
-            client.Initialize();
-            
-
-
-            //_hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
-            //{
-            //    var newMessage = $"{user}: {message}";
-
-            //});
-            //try
-            //{
-            //    await _hubConnection.StartAsync();
-            //    chatBox.Items.Add("Connected");
-            //}
-            //catch (Exception ex)
-            //{
-            //    chatBox.Items.Add(ex.Message);
-            //}
         }
-        private void buttonSend_Click(object sender, EventArgs e)
+        private async void buttonSend_Click(object sender, EventArgs e)
         {
             try
             {
-                var messege = textBoxSend.Text;
-                if (!string.IsNullOrEmpty(messege))
+                using (HttpClient httpClient = new HttpClient())
                 {
-                    client.SendData(_currentUser, messege);
+                    using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:7278/api/sendmessage"))
+                    {
+                        string body = $"{_currentUser.FirstName} -- {textBoxSend.Text}";
+                        request.Content = new StringContent(JsonConvert.SerializeObject(body)/*, Encoding.UTF8, "application/json"*/);
+
+                        HttpResponseMessage responseMessage = await httpClient.SendAsync(request).ConfigureAwait(false);
+
+                        if (responseMessage == null)
+                        {
+                            throw new Exception();
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
-                chatBox.Items.Add(ex);
+                UpdateChatBox(ex.Message);
             }
-            //try
-            //{
-            //    await _hubConnection.InvokeAsync("Send Message", _currentUser, textBoxSend.Text);
-            //}
-            //catch (Exception ex)
-            //{
-            //    chatBox.Items.Add(ex.Message);
-            //}
-            //finally { textBoxSend.Text = ""; }
+        }
+
+        //cross-thread exceptions were an issue when trying to update UI controls
+        //Use of MethodInvoker relieves cross-threading
+        private void UpdateChatBox(string text)
+        {
+            chatBox.Invoke((MethodInvoker)(() => chatBox.Items.Add(text)));
+            textBoxSend.Invoke((MethodInvoker)(() => textBoxSend.Text = ""));
         }
 
         private void navToggle_Click(object sender, EventArgs e)
