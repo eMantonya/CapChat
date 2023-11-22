@@ -70,6 +70,9 @@
             label7 = new Label();
             label6 = new Label();
             panelChat = new Panel();
+            textBoxSend = new TextBox();
+            buttonSend = new Button();
+            chatBox = new ListBox();
             Placeholder = new Label();
             panelNavigation.SuspendLayout();
             panelNavButtons.SuspendLayout();
@@ -178,6 +181,7 @@
             buttonChat.TabIndex = 2;
             buttonChat.Text = "Chat";
             buttonChat.UseVisualStyleBackColor = false;
+            buttonChat.Click += buttonChat_Click;
             // 
             // navToggle
             // 
@@ -588,11 +592,49 @@
             // panelChat
             // 
             panelChat.BackColor = Color.Transparent;
+            panelChat.Controls.Add(textBoxSend);
+            panelChat.Controls.Add(buttonSend);
+            panelChat.Controls.Add(chatBox);
             panelChat.Controls.Add(Placeholder);
             panelChat.Location = new Point(51, 0);
             panelChat.Name = "panelChat";
             panelChat.Size = new Size(731, 462);
             panelChat.TabIndex = 11;
+            // 
+            // textBoxSend
+            // 
+            textBoxSend.BackColor = Color.SlateGray;
+            textBoxSend.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxSend.ForeColor = Color.LightSkyBlue;
+            textBoxSend.Location = new Point(19, 415);
+            textBoxSend.Name = "textBoxSend";
+            textBoxSend.Size = new Size(542, 29);
+            textBoxSend.TabIndex = 3;
+            // 
+            // buttonSend
+            // 
+            buttonSend.BackColor = Color.SlateGray;
+            buttonSend.FlatStyle = FlatStyle.Popup;
+            buttonSend.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonSend.ForeColor = Color.LightSkyBlue;
+            buttonSend.Location = new Point(583, 414);
+            buttonSend.Name = "buttonSend";
+            buttonSend.Size = new Size(108, 30);
+            buttonSend.TabIndex = 2;
+            buttonSend.Text = "Send";
+            buttonSend.UseVisualStyleBackColor = false;
+            buttonSend.Click += buttonSend_Click;
+            // 
+            // chatBox
+            // 
+            chatBox.BackColor = Color.SlateGray;
+            chatBox.BorderStyle = BorderStyle.None;
+            chatBox.FormattingEnabled = true;
+            chatBox.ItemHeight = 15;
+            chatBox.Location = new Point(5, 101);
+            chatBox.Name = "chatBox";
+            chatBox.Size = new Size(686, 300);
+            chatBox.TabIndex = 1;
             // 
             // Placeholder
             // 
@@ -601,9 +643,9 @@
             Placeholder.ForeColor = Color.LightSkyBlue;
             Placeholder.Location = new Point(260, 40);
             Placeholder.Name = "Placeholder";
-            Placeholder.Size = new Size(148, 32);
+            Placeholder.Size = new Size(139, 32);
             Placeholder.TabIndex = 0;
-            Placeholder.Text = "Placeholder";
+            Placeholder.Text = "Chat Room";
             // 
             // Profile
             // 
@@ -683,5 +725,8 @@
         private Button buttonCancelPassChange;
         private Panel panelChat;
         private Label Placeholder;
+        public ListBox chatBox;
+        private TextBox textBoxSend;
+        private Button buttonSend;
     }
 }

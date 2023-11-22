@@ -1,16 +1,5 @@
-﻿using CapChat;
-using Microsoft.AspNetCore.SignalR.Client;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using Newtonsoft.Json;
 using UserLibrary;
 
 namespace CapChat
@@ -18,42 +7,40 @@ namespace CapChat
     public partial class Profile : Form
     {
         private User _currentUser;
+        private HubConnection _hubConnection;
+        
         public Profile(User currentUser)
         {
             InitializeComponent();
+            
             _currentUser = currentUser;
 
-            var builder = new ConfigurationBuilder()
-            .AddUserSecrets<Profile>();
+            _hubConnection = new HubConnectionBuilder().WithUrl("http://localhost:7278/api/").Build();//change this url to the url of negotiate function once deployed/store in key vault
+            try
+            {
+                _hubConnection.StartAsync();
+                chatBox.Items.Add("Connected!");
+            }
+            catch (Exception ex)
+            {
+                chatBox.Items.Add($"{ex.Message}");
+            }
 
-            IConfiguration configuration = builder.Build();
-
-            string signalRConnection = configuration["SignalRConnection"];
-
-            conn = new HubConnectionBuilder()
-                .WithUrl(signalRConnection)
-                .Build();
-
-            conn.Closed += HubConnection_Closed;
-
+            _hubConnection.On<string>("newMessage", (message) =>
+            {
+                UpdateChatBox(message);
+            });
         }
-
-        private async Task HubConnection_Closed(Exception? arg)
-        {
-            await Task.Delay(new Random().Next(0, 5) * 1000);
-            await conn.StartAsync();
-        }
-
-        HubConnection conn;
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
+            _hubConnection.StopAsync();
             Landing landing = new Landing();
             this.Hide();
             landing.Show();
         }
 
-        private void Profile_Load(object sender, EventArgs e)
+        private async void Profile_Load(object sender, EventArgs e)
         {
             Landing landing = new Landing();
 
@@ -68,6 +55,7 @@ namespace CapChat
             buttonLogout.BackColor = Color.Transparent;
             labelEditSuccess.Visible = false;
             panelChangePassword.Visible = false;
+            panelChat.Visible = false;
 
 
             panelAccount.Visible = true;
@@ -77,16 +65,40 @@ namespace CapChat
             labelFirstName.Text = _currentUser.FirstName;
             labelLastName.Text = _currentUser.LastName;
             labelEmail.Text = _currentUser.Email;
-
-            conn.On<string, string>("ReceiveMessage", (user, message) =>
+        }
+        private async void buttonSend_Click(object sender, EventArgs e)
+        {
+            try
             {
-                var newMessage = $"{user}: {message}";
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:7278/api/sendmessage"))
+                    {
+                        string body = $"{_currentUser.FirstName} -- {textBoxSend.Text}";
+                        request.Content = new StringContent(JsonConvert.SerializeObject(body)/*, Encoding.UTF8, "application/json"*/);
 
-            });
+                        HttpResponseMessage responseMessage = await httpClient.SendAsync(request).ConfigureAwait(false);
 
+                        if (responseMessage == null)
+                        {
+                            throw new Exception();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                UpdateChatBox(ex.Message);
+            }
         }
 
- 
+        //cross-thread exceptions were an issue when trying to update UI controls
+        //Use of MethodInvoker relieves cross-threading
+        private void UpdateChatBox(string text)
+        {
+            chatBox.Invoke((MethodInvoker)(() => chatBox.Items.Add(text)));
+            textBoxSend.Invoke((MethodInvoker)(() => textBoxSend.Text = ""));
+        }
 
         private void navToggle_Click(object sender, EventArgs e)
         {
@@ -118,18 +130,17 @@ namespace CapChat
             }
         }
 
-
-
         private void buttonAccount_Click(object sender, EventArgs e)
         {
             panelAccount.Visible = true;
             panelChangePassword.Visible = false;
+            panelChat.Visible = false;
             panelAccount.BringToFront();
             labelEditSuccess.Visible = false;
             labelFirstName.Text = _currentUser.FirstName;
             labelLastName.Text = _currentUser.LastName;
             labelEmail.Text = _currentUser.Email;
-            //navToggle_Click(this, e);
+            navToggle_Click(this, e);
         }
 
         private void buttonSubmitEdit_Click(object sender, EventArgs e)
@@ -233,5 +244,15 @@ namespace CapChat
             buttonAccount_Click(sender, e);
         }
 
+        private void buttonChat_Click(object sender, EventArgs e)
+        {
+            panelAccount.Visible = false;
+            panelChangePassword.Visible = false;
+            panelEditProfile.Visible = false;
+
+            panelChat.Visible = true;
+            panelChat.BringToFront();
+            navToggle_Click(sender, e);
+        }
     }
 }

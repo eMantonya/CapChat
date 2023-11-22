@@ -5,9 +5,9 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientGUI", "CapChat\ClientGUI.csproj", "{328A69C8-3D1A-4961-952E-4875CF34A562}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserLibrary", "UserLibrary\UserLibrary.csproj", "{F88FBC66-4819-46E9-A245-8DBB66526D67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserLibrary", "UserLibrary\UserLibrary.csproj", "{F88FBC66-4819-46E9-A245-8DBB66526D67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientTests", "ClientTests\ClientTests.csproj", "{B145F19C-5E2D-453D-9EAD-0AA4157F6761}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientTests", "ClientTests\ClientTests.csproj", "{B145F19C-5E2D-453D-9EAD-0AA4157F6761}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
