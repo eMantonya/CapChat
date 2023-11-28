@@ -27,21 +27,17 @@ namespace CapChat
             InitializeComponent();
             
             _currentUser = currentUser;
-
-            var builder = new ConfigurationBuilder()
-                .AddUserSecrets<Profile>();
-
-            IConfiguration configuration = builder.Build();
-
-            string signalRConnection = configuration["SignalRConnection"];
-            string signalRToken = configuration["SignalRToken"];
-
-            _hubConnection = new HubConnectionBuilder()
-                .WithUrl("https://capchat.service.signalr.net/", options =>
-                {
-                    options.AccessTokenProvider = () => Task.FromResult(signalRToken);
-                })
-                .Build();
+            
+            _hubConnection = new HubConnectionBuilder().WithUrl("http://localhost:7278/api/").Build();//url of azure 'negotiate' function once redeployed
+            try
+            {
+                _hubConnection.StartAsync();
+                chatBox.Items.Add("Connected!");
+            }
+            catch (Exception ex)
+            {
+                chatBox.Items.Add($"{ex.Message}");
+            }
 
             _hubConnection.Closed += async (error) =>
             {
@@ -82,11 +78,19 @@ namespace CapChat
             labelFirstName.Text = _currentUser.FirstName;
             labelLastName.Text = _currentUser.LastName;
             labelEmail.Text = _currentUser.Email;
-
-
-            _hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
+        }
+        private async void buttonSend_Click(object sender, EventArgs e)
+        {
+            try
             {
-                var newMessage = $"{user}: {message}";
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:7278/api/sendmessage/")) //url of azure 'sendmessage' function once redeployed
+                    {
+                        string body = $"{_currentUser.FirstName} -- {textBoxSend.Text}";
+                        request.Content = new StringContent(JsonConvert.SerializeObject(body)/*, Encoding.UTF8, "application/json"*/);
+
+                        HttpResponseMessage responseMessage = await httpClient.SendAsync(request).ConfigureAwait(false);
 
             });
             try
