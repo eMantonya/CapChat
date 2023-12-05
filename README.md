@@ -16,9 +16,9 @@
 
 ✔️ 7. **Profile Window**: Design a user profile window to display and edit user details.
 
-  8. **Chat Window**: Develop a chat interface for users to communicate.
+✔️ 8. **Chat Window**: Develop a chat interface for users to communicate.
 
-  9. **SignalR Real-Time Communication**: Implement SignalR for real-time communication features.
+✔️ 9. **SignalR Real-Time Communication**: Implement SignalR for real-time communication features.
 
 ## Updates/Improvements for the Future
 
