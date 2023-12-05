@@ -1,5 +1,3 @@
-using CapChat;
-using System.Diagnostics.Eventing.Reader;
 using UserLibrary;
 
 namespace CapChat

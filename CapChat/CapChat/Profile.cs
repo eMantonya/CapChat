@@ -1,20 +1,6 @@
-﻿using CapChat;
-using Microsoft.AspNetCore.SignalR.Client;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using Newtonsoft.Json;
 using UserLibrary;
-using static System.Net.WebRequestMethods;
 
 namespace CapChat
 {
@@ -22,13 +8,15 @@ namespace CapChat
     {
         private User _currentUser;
         private HubConnection _hubConnection;
+        
         public Profile(User currentUser)
         {
             InitializeComponent();
             
             _currentUser = currentUser;
-            
-            _hubConnection = new HubConnectionBuilder().WithUrl("http://localhost:7278/api/").Build();//url of azure 'negotiate' function once redeployed
+
+            _hubConnection = new HubConnectionBuilder().WithUrl("http://localhost:7278/api/").Build();//change this url to the url of negotiate function once deployed/store in key vault
+
             try
             {
                 _hubConnection.StartAsync();
@@ -39,15 +27,15 @@ namespace CapChat
                 chatBox.Items.Add($"{ex.Message}");
             }
 
-            _hubConnection.Closed += async (error) =>
+            _hubConnection.On<string>("newMessage", (message) =>
             {
-                await Task.Delay(new Random().Next(0, 5) * 1000);
-                await _hubConnection.StartAsync();
-            };
+                UpdateChatBox(message);
+            });
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
+            _hubConnection.StopAsync();
             Landing landing = new Landing();
             this.Hide();
             landing.Show();
@@ -103,17 +91,13 @@ namespace CapChat
                 chatBox.Items.Add(ex.Message);
             }
         }
-        private async void buttonSend_Click(object sender, EventArgs e)
+
+        //cross-thread exceptions were an issue when trying to update UI controls
+        //Use of MethodInvoker relieves cross-threading
+        private void UpdateChatBox(string text)
         {
-            try
-            {
-                await _hubConnection.InvokeAsync("Send Message", _currentUser, textBoxSend.Text);
-            }
-            catch (Exception ex)
-            {
-                chatBox.Items.Add(ex.Message);
-            }
-            finally { textBoxSend.Text = ""; }
+            chatBox.Invoke((MethodInvoker)(() => chatBox.Items.Add(text)));
+            textBoxSend.Invoke((MethodInvoker)(() => textBoxSend.Text = ""));
         }
 
         private void navToggle_Click(object sender, EventArgs e)

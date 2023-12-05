@@ -725,7 +725,7 @@
         private Button buttonCancelPassChange;
         private Panel panelChat;
         private Label Placeholder;
-        private ListBox chatBox;
+        public ListBox chatBox;
         private TextBox textBoxSend;
         private Button buttonSend;
     }
