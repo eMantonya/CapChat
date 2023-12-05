@@ -16,6 +16,7 @@ namespace CapChat
             _currentUser = currentUser;
 
             _hubConnection = new HubConnectionBuilder().WithUrl("http://localhost:7278/api/").Build();//change this url to the url of negotiate function once deployed/store in key vault
+
             try
             {
                 _hubConnection.StartAsync();
@@ -72,23 +73,22 @@ namespace CapChat
             {
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:7278/api/sendmessage"))
+                    using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:7278/api/sendmessage/")) //url of azure 'sendmessage' function once redeployed
                     {
                         string body = $"{_currentUser.FirstName} -- {textBoxSend.Text}";
                         request.Content = new StringContent(JsonConvert.SerializeObject(body)/*, Encoding.UTF8, "application/json"*/);
 
                         HttpResponseMessage responseMessage = await httpClient.SendAsync(request).ConfigureAwait(false);
 
-                        if (responseMessage == null)
-                        {
-                            throw new Exception();
-                        }
-                    }
-                }
+            });
+            try
+            {
+                await _hubConnection.StartAsync();
+                chatBox.Items.Add("Connected");
             }
             catch (Exception ex)
             {
-                UpdateChatBox(ex.Message);
+                chatBox.Items.Add(ex.Message);
             }
         }
 
